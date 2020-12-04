@@ -116,12 +116,13 @@ https://www.udemy.com/course/react-redux/
     * Inline styling is a bit different
     * HTML
       ```html
-      <div style="background-color: red;"></div>
+      <div style="background-color: blue; color: white;"></div>
       ```
     * JSX
-      * 'double curly' the double quote.
-      * 'camel case' the hyphen
-      * 'single quote' the value
+      1. 'double curly' the double quote.
+      2. 'camel case' the hyphen
+      3. 'comma or remove' the semicolon
+      4. 'single quote' the value
       ```jsx
-      <div style={{backgroundColor: 'red'}}></div>
+      <div style={{backgroundColor: 'blue', color: 'white'}}></div>
       ```
