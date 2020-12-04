@@ -1,4 +1,4 @@
-https://www.udemy.com/course/react-redux/learn/lecture/12531052#overview
+https://www.udemy.com/course/react-redux/
 
 # Section 1: Let's Dive In!
 * What is App Function?
