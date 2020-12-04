@@ -1,5 +1,4 @@
-
-# `broject` 👮🕵
+# `broject` 🧑‍🚀 👨‍🚀
 > collaborative work of jeju5 and minkj1992 in the winter of 2020.
 
 ```python
