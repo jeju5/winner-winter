@@ -115,7 +115,7 @@ https://www.udemy.com/course/react-redux/
   1. 'double curly' the double quote.
   2. 'camel case' the hyphen
   3. 'comma or remove' the semicolon
-  4. 'single quote' the value
+  4. 'single quote' the property
   * HTML
     ```html
     <div style="background-color: blue; color: white;"></div>
@@ -128,8 +128,8 @@ https://www.udemy.com/course/react-redux/
 * single quote or double quote?
   * javascript doesn't differentiate ' and ".
   * By convention in the community
-    * Double quote the non-css value.
-    * Single quote the css value.
+    * Single quote the styling property.
+    * Double quote the jsx property.
       ```js
       const App = () => {
        return (
