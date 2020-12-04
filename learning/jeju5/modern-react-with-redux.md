@@ -93,3 +93,23 @@ https://www.udemy.com/course/react-redux/
   )
   ```
  
+# Section 2: Building Content with JSX
+  * Babel
+    * babel website offers online sandbox: babeljs.io
+    * if you put App component in the sandbox babel sandbox shows how it internally changes it into javascript call
+      ```
+      const App = () => {
+       return <div>Hi There!</div>
+      }
+      ```
+    * This is how App component in jsx is translated into javascript
+      ```
+      const App = () => {
+        return React.createElement("div", null, "Hi There!");
+      };
+      ```
+    * In short, we write into 'jsx' for simplicity. This gets rendered into javascript by babel, which eventually creates DOM element.
+    * Then why use 'jsx' instead of making 'React.creaateElement(..)' call by my self
+      * => It is not mandatory, but it simplifies our code.
+      
+      
