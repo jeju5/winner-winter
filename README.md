@@ -1,4 +1,4 @@
-# project december-brothers?
+# ?
 collaborative work of jeju5 and minkj1992 in the winter of 2020.
 
 # plans
