@@ -160,6 +160,13 @@ https://www.udemy.com/course/react-redux/
     ```jsx
     <div className="big-reminder"></div>
     ```
+  * Likewise JSX wants to avoid confusing keywords. For example 'for' can be placed in <label> element while it also means javascript 'for' loop. In this case   'HtmlFor' is advised.
+    * Use dev tools to monitor these errors.
+    ```
+    <label for="big-reminder"></div>
+    <label htmlFor="big-reminder"></div>
+    ```
+    
 * JSX Syntax: JSX can reference the javascript variables with {} (single curly braces)
   ```js
   // Create react components
@@ -225,5 +232,3 @@ https://www.udemy.com/course/react-redux/
        </button>   
       )
       ```
-
-
