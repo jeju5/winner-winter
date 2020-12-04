@@ -232,3 +232,4 @@ https://www.udemy.com/course/react-redux/
        </button>   
       )
       ```
+# Section 3: Communicating with Props
