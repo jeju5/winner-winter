@@ -160,7 +160,7 @@ https://www.udemy.com/course/react-redux/
     ```jsx
     <div className="big-reminder"></div>
     ```
-* JSX Syntax: JSX can reference the javascript variable with {} (single curly braces)
+* JSX Syntax: JSX can reference the javascript variables with {} (single curly braces)
   ```js
   // Create react components
   const App = () => {
@@ -179,3 +179,49 @@ https://www.udemy.com/course/react-redux/
    )
   }
   ```
+  * JSX can refer to 
+    * javascript string, integer, array, function ...
+      ```js
+      const someVal = 'Click'
+      const someVal = 123123
+      const someVal = [123,123] /* this gets concatenated to 123123 */
+
+      return (
+       <button style={{backgroundColor: 'blue', color: 'white'}}>
+        {someVal}
+       </button>   
+      )
+      ```
+      ```js
+      const someFunc = () = > { return 'Click'}
+
+      return (
+       <button style={{backgroundColor: 'blue', color: 'white'}}>
+        {someFunc()}
+       </button>   
+      )
+      ```
+  * JSX can not refer to 
+    * javascript object itself. (it can refer to a compatiable property in javascript object)
+      ```js
+      /* errors out */
+      const someVal = { text: 'Click Me', number: 3123 }
+      
+      return (
+       <button style={{backgroundColor: 'blue', color: 'white'}}>
+        {someVal}
+       </button>   
+      )
+      ```
+      ```js
+      /* works */
+      const someVal = { text: 'Click Me', number: 3123 }
+      
+      return (
+       <button style={{backgroundColor: 'blue', color: 'white'}}>
+        {someVal.text}
+       </button>   
+      )
+      ```
+
+
