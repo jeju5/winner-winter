@@ -71,7 +71,7 @@ https://www.udemy.com/course/react-redux/
   npm start    <-- this launches react application (npm = node package manager for node.js apps)
   ```
 * Import
-  ```
+  ```js
   // Import Syntax of ES2015
   import React from 'react'          /* import what's inside of nodemodules/react */
   import ReactDOM from 'react-dom';  /* import what's inside of nodemodules/react-dom */
