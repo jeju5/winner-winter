@@ -130,7 +130,7 @@ https://www.udemy.com/course/react-redux/
   * single quote or double quote?
     * javascript doesn't differentiate ' and ".
     * By convention in the community
-      * Single quote the styling property.
+      * Single quote the non-jsx property.
       * Double quote the jsx property.
         ```js
         const App = () => {
@@ -160,3 +160,22 @@ https://www.udemy.com/course/react-redux/
     ```jsx
     <div className="big-reminder"></div>
     ```
+* JSX Syntax: JSX can reference the javascript variable with {} (single curly braces)
+  ```js
+  // Create react components
+  const App = () => {
+   const buttonText = 'Click me';  /* <== js variable defined */
+
+   return (
+    <div>
+     <label className="label" for="name">
+      Enter Name:
+     </label>
+     <input id="name" type="text" />
+     <button style={{backgroundColor: 'blue', color: 'white'}}>
+      {buttonText}  /* <== js variable referenced */
+     </button>
+    </div>
+   )
+  }
+  ```
