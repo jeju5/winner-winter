@@ -112,10 +112,13 @@ https://www.udemy.com/course/react-redux/
   * Then why use 'jsx' instead of making 'React.creaateElement(..)' call by my self
     * => It is not mandatory, but it simplifies our code.
 * JSX Syntax: Inline Styling
-  * 1. 'double curly' the double quote.
-  * 2. 'camel case' the hyphen
-  * 3. 'comma or remove' the semicolon
-  * 4. 'single quote' the property
+  ```
+  <4 RULES>
+  1. 'double curly' the double quote.
+  2. 'camel case' the hyphen
+  3. 'comma or remove' the semicolon
+  4. 'single quote' the property
+  ```
   * HTML
     ```html
     <div style="background-color: blue; color: white;"></div>
@@ -145,7 +148,10 @@ https://www.udemy.com/course/react-redux/
         }
         ```
 * JSX Syntax: Class naming
-  1. put 'className' instead of 'class'. (we don't want to confuse javascript. javascript class vs html class?)
+  ```
+  <1 RULE>
+  put 'className' instead of 'class'. (we don't want to confuse javascript. javascript class vs html class?)
+  ```
   * HTML
     ```html
     <div class="big-reminder"></div>
