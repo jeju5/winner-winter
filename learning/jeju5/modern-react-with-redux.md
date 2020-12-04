@@ -54,4 +54,20 @@ https://www.udemy.com/course/react-redux/
     npm install -g create-react-app
     create-react-app {project-name}
     ```
-  * 
+  * what is babel?
+    * this resolves conflicts that can come from different java script version.
+    * create-react-app by default includes babel.
+  * how does 'create-react-app' looks like
+    ```
+    {project}
+        /nodemodules      <-- project dependencies file
+        /public           <-- stores static file (html, images and music files)
+        /src              <-- source codes
+        package.json      <-- project package dependencies
+        package-lock.json <-- project package dependencies (tree of full & exact version)
+    ```
+* Starting a React Project
+  ```
+  npm start    <-- this launches react application (npm = node package manager for node.js apps)
+  ```
+ 
