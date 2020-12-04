@@ -111,7 +111,7 @@ https://www.udemy.com/course/react-redux/
   * In short, we write into 'jsx' for simplicity. This gets rendered into javascript by babel, which eventually creates DOM element.
   * Then why use 'jsx' instead of making 'React.creaateElement(..)' call by my self
     * => It is not mandatory, but it simplifies our code.
-* HTML->JSX Inline Styling Conversion
+* JSX Syntax #1: Inline Styling
   1. 'double curly' the double quote.
   2. 'camel case' the hyphen
   3. 'comma or remove' the semicolon
@@ -121,27 +121,28 @@ https://www.udemy.com/course/react-redux/
     <div style="background-color: blue; color: white;"></div>
     ```
   * JSX
-
     ```jsx
     <div style={{backgroundColor: 'blue', color: 'white'}}></div>
     ```
-* single quote or double quote?
-  * javascript doesn't differentiate ' and ".
-  * By convention in the community
-    * Single quote the styling property.
-    * Double quote the jsx property.
-      ```js
-      const App = () => {
-       return (
-        <div>
-         <label id="label" for="name">
-          Enter Name:
-         </label>
-         <input id="name" type="text" />
-         <button style={{backgroundColor: 'blue', color: 'white'}}>
-          Submit
-         </button>
-        </div>
-       )
-      }
-      ```
+  * single quote or double quote?
+    * javascript doesn't differentiate ' and ".
+    * By convention in the community
+      * Single quote the styling property.
+      * Double quote the jsx property.
+        ```js
+        const App = () => {
+         return (
+          <div>
+           <label id="label" for="name">
+            Enter Name:
+           </label>
+           <input id="name" type="text" />
+           <button style={{backgroundColor: 'blue', color: 'white'}}>
+            Submit
+           </button>
+          </div>
+         )
+        }
+        ```
+* JSX Syntax #2: Class naming
+  1. put 'className' instead of 'class'
