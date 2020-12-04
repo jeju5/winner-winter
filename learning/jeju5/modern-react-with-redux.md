@@ -111,18 +111,37 @@ https://www.udemy.com/course/react-redux/
   * In short, we write into 'jsx' for simplicity. This gets rendered into javascript by babel, which eventually creates DOM element.
   * Then why use 'jsx' instead of making 'React.creaateElement(..)' call by my self
     * => It is not mandatory, but it simplifies our code.
-  * JSX -> babel -> javascript -> html
-  * So JSX is similar to HTML, but how is it different from each other?
-    * Inline styling is a bit different
-    * HTML
-      ```html
-      <div style="background-color: blue; color: white;"></div>
-      ```
-    * JSX
-      1. 'double curly' the double quote.
-      2. 'camel case' the hyphen
-      3. 'comma or remove' the semicolon
-      4. 'single quote' the value
-      ```jsx
-      <div style={{backgroundColor: 'blue', color: 'white'}}></div>
+* HTML->JSX Inline Styling Conversion
+  1. 'double curly' the double quote.
+  2. 'camel case' the hyphen
+  3. 'comma or remove' the semicolon
+  4. 'single quote' the value
+  * HTML
+    ```html
+    <div style="background-color: blue; color: white;"></div>
+    ```
+  * JSX
+
+    ```jsx
+    <div style={{backgroundColor: 'blue', color: 'white'}}></div>
+    ```
+* single quote or double quote?
+  * javascript doesn't differentiate ' and ".
+  * By convention in the community
+    * Double quote the non-css value.
+    * Single quote the css value.
+      ```react
+      const App = () => {
+       return (
+        <div>
+         <label id="label" for="name">
+          Enter Name:
+         </label>
+         <input id="name" type="text" />
+         <button style={{backgroundColor: 'blue', color: 'white'}}>
+          Submit
+         </button>
+        </div>
+       )
+      }
       ```
