@@ -180,10 +180,11 @@ https://www.udemy.com/course/react-redux/
   }
   ```
   * JSX can refer to 
-    * javascript string, integer, array, function ...
+    * javascript string, integer, integer and array
       ```js
       const someVal = 'Click'
       const someVal = 123123
+      const someVal = true
       const someVal = [123,123] /* this gets concatenated to 123123 */
 
       return (
@@ -192,6 +193,7 @@ https://www.udemy.com/course/react-redux/
        </button>   
       )
       ```
+    * javascript function
       ```js
       const someFunc = () = > { return 'Click'}
 
