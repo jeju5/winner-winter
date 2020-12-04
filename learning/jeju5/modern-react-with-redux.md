@@ -45,3 +45,13 @@ https://www.udemy.com/course/react-redux/
     import React from "react";
     import ReactDOM from "react-dom";
     ```
+* Creating a React Project
+  * Install node.js and Start a react project 'myapp'
+    ```
+    https://nodejs.org/en/download/
+    node -v
+    
+    npm install -g create-react-app
+    create-react-app {project-name}
+    ```
+  * 
