@@ -130,7 +130,7 @@ https://www.udemy.com/course/react-redux/
   * By convention in the community
     * Double quote the non-css value.
     * Single quote the css value.
-      ```react
+      ```js
       const App = () => {
        return (
         <div>
