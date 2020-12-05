@@ -63,23 +63,21 @@ $ yarn start
 
 ```json
 query {
-
-	movie(id:24502){
-    title
-  }
-}
-
-query {
 	movies (limit:10){
     id
   	title
     rating
-    summary
     language
     medium_cover_image
   }
+
 	movie(id:24502){
+    title
+  }
+  suggestions(id:24502){
     title
   }
 }
 ```
+
+![](../../assets/playground.png)
