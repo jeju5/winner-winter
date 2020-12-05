@@ -1,11 +1,14 @@
 type Query {
-    people: [Person]!
-    person(id: Int!): Person
+  movies: [Movie]!
+  movie(id: Int!): Movie
 }
 
-type Person {
-    id: String!
-    name: String!
-    age: Int!
-    gender: String!
+type Mutation {
+  addMovie(score: Int!, name: String!): Movie!
+}
+
+type Movie {
+  id: Int!
+  name: String!
+  score: Int!
 }

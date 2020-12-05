@@ -27,3 +27,7 @@ images: [https://source.unsplash.com/collection/1245/1200x628]
   - ex: 구매 서비스에 필요한, 유저데이터, 상품 데이터를 한번에 가져옴
 
 ## Query & Mutation
+
+- 느낌
+  - Query는 fetch(GET)
+  - Mutation은 상태 변경 (PUT/PATCH)
