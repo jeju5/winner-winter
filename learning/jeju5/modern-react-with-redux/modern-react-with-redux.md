@@ -386,30 +386,30 @@ https://www.udemy.com/course/react-redux/
   5. State must be updated with 'setState'
   ```
 * State initialization
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+	```js
+	import React from 'react';
+	import ReactDOM from 'react-dom';
 
-class App extends React.Component {
+	class App extends React.Component {
 
-	// constructor is automatically called with props
-	constructor(prop) {
-		super(prop);
+		// constructor is automatically called with props
+		constructor(prop) {
+			super(prop);
 
-		this.state = { latitude : null };
+			this.state = { latitude : null };
+		}
+
+		render () {
+			return (
+				<div>
+					Latitude: {this.state.latitude}
+				</div>
+			);
+		}
 	}
 
-	render () {
-		return (
-			<div>
-				Latitude: {this.state.latitude}
-			</div>
-		);
-	}
-}
-
-ReactDOM.render(
-	<App />,
-	document.querySelector('#root')
-)
-```
+	ReactDOM.render(
+		<App />,
+		document.querySelector('#root')
+	)
+	```
