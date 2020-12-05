@@ -413,3 +413,40 @@ https://www.udemy.com/course/react-redux/
 		document.querySelector('#root')
 	)
 	```
+* State & setState
+	* always use this.setState({key: value})
+	* never do this.state = ..
+	```js
+	import React from 'react';
+	import ReactDOM from 'react-dom';
+
+	class App extends React.Component {
+
+		// constructor is automatically called with props
+		constructor(prop) {
+			super(prop);
+
+			window.navigator.geolocation.getCurrentPosition(
+				position => {
+						this.setState({latitude: position.coords.latitude})
+				},
+				err => console.log(err)
+			)
+
+			this.state = { latitude : null };
+		}
+
+		render () {
+			return (
+					<div>
+					Latitude: {this.state.latitude}
+				</div>
+			);
+		}
+	}
+
+	ReactDOM.render(
+		<App />,
+		document.querySelector('#root')
+	)
+	```
