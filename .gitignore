@@ -111,3 +111,7 @@ fabric.properties
 
 # npm
 **/node_modules
+
+**/*.lock
+**/package-lock.json
+.vscode
