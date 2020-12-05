@@ -313,8 +313,17 @@ https://www.udemy.com/course/react-redux/
   ...
    {props.children}  /* just like value properties, component properties are passed into 'props' object. specifically 'props.children' */
   ```
-  
-  
-  
-  
-  
+# Section 4: Structuring Apps with Class-Based Components
+* How React used to be
+  ```
+  Funtionial Components: produces jsx (no access to LifeCycle and State System)
+  Class Components: produces jsx with access to LifeCycle and State System.
+  ```
+* How React is now
+  ```
+  Function Components
+   - produces jsx
+   - use Hooks Systems to run code at specific point of time
+   - use Hooks Systems to get access to State System.
+  Class Components: produces jsx with access to LifeCycle and State System.
+  ```
