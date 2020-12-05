@@ -3,11 +3,14 @@
 # If a command fails then the deploy stops
 set -e
 
-BASEDIR='./learning/minkj1992'
+
 printf "\033[0;32mPush to forked repo and origin repo to GitHub...\033[0m\n"
 
+# go to repo dir
 cd ../..
-pwd
+echo "Change dir to root-repo dir"
+printf "\033[0;32mCurrent Dir: $(pwd) \033[0m\n"
+
 
 # Add changes to git.
 
@@ -29,5 +32,6 @@ git fetch upstream
 git push upstream main
 
 
+# BASEDIR='./learning/minkj1992'
 # # back to proj dir
 # cd $BASEDIR
