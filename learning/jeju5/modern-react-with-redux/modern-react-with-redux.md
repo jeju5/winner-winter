@@ -392,52 +392,52 @@ https://www.udemy.com/course/react-redux/
   * always use this.setState({key: value})
   * never do 'this.state = value' when updating the state
     * only exception to 'this.state = value' is when initializing the state 
-  ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+	```js
+	import React from 'react';
+	import ReactDOM from 'react-dom';
 
-class App extends React.Component {
+	class App extends React.Component {
 
-  // constructor is automatically called with props
-  constructor(prop) {
-    console.log("const")
-    super(prop);
-    this.state = {
-      latitude : null,
-      errorMsg : null
-    };
-    
-    window.navigator.geolocation.getCurrentPosition(
-      position => {
-          this.setState({
-            latitude: position.coords.latitude
-          })
-      },
-      err => {
-        this.setState({
-          errorMsg: err.message
-        })
-      }
-    )
-  }
+		// constructor is automatically called with props
+		constructor(prop) {
+			console.log("const")
+			super(prop);
+			this.state = {
+				latitude : null,
+				errorMsg : null
+			};
 
-  render () {
-    console.log("render")
+			window.navigator.geolocation.getCurrentPosition(
+				position => {
+						this.setState({
+							latitude: position.coords.latitude
+						})
+				},
+				err => {
+					this.setState({
+						errorMsg: err.message
+					})
+				}
+			)
+		}
 
-    const errorBar = this.state.errorMsg ? "Error: " + this.state.errorMsg : null;
+		render () {
+			console.log("render")
 
-    return (
-      <div>
-        Latitude: {this.state.latitude}
-        <br />
-        {errorBar}
-      </div>
-    );
-  }
-}
+			const errorBar = this.state.errorMsg ? "Error: " + this.state.errorMsg : null;
 
-ReactDOM.render(
-  <App />,
-  document.querySelector('#root')
-)
-  ```
+			return (
+				<div>
+					Latitude: {this.state.latitude}
+					<br />
+					{errorBar}
+				</div>
+			);
+		}
+	}
+
+	ReactDOM.render(
+		<App />,
+		document.querySelector('#root')
+	)
+	```
