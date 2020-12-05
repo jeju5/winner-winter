@@ -438,7 +438,7 @@ https://www.udemy.com/course/react-redux/
 
 		render () {
 			return (
-					<div>
+				<div>
 					Latitude: {this.state.latitude}
 				</div>
 			);
