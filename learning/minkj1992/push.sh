@@ -22,5 +22,4 @@ git push origin main
 
 # push to origin repo
 git fetch upstream
-git merge upstream/main
-git push upstream/main
+git push upstream main
