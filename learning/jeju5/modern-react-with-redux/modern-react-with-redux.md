@@ -327,3 +327,11 @@ https://www.udemy.com/course/react-redux/
    - use Hooks Systems to get access to State System.
   Class Components: produces jsx with access to LifeCycle and State System.
   ```
+* Now that React Function Components are similar to Class Components, which one should we learn and use?
+  * need to learn both because of legacy codes.
+  * many companies have project that uses both.
+* Geolocation
+  * https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+    ```
+    window.navigator.geolocation.getCurrentPosition()
+    ```
