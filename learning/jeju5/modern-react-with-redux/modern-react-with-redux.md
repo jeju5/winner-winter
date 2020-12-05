@@ -400,22 +400,37 @@ https://www.udemy.com/course/react-redux/
 
 		// constructor is automatically called with props
 		constructor(prop) {
+			console.log("const")
 			super(prop);
+			this.state = {
+				latitude : null,
+				errorMsg : null
+			};
 
 			window.navigator.geolocation.getCurrentPosition(
 				position => {
-						this.setState({latitude: position.coords.latitude})
+						this.setState({
+							latitude: position.coords.latitude
+						})
 				},
-				err => console.log(err)
+				err => {
+					this.setState({
+						errorMsg: err.message
+					})
+				}
 			)
-
-			this.state = { latitude : null };
 		}
 
 		render () {
+			console.log("render")
+
+			const errorBar = this.state.errorMsg ? "Error: " + this.state.errorMsg : null;
+
 			return (
 				<div>
 					Latitude: {this.state.latitude}
+					<br />
+					{errorBar}
 				</div>
 			);
 		}
