@@ -56,3 +56,18 @@ $ yarn start
 - `vs_code GraphQL` 추가해주면 좋다.
 - Server(GraphQL Playground) on http://127.0.0.1:4000
 
+- Playground 쿼리 예시
+
+```Playground
+query {
+  people {
+    id,
+    gender,
+    name,
+    age,
+  },
+  person(id:8)  {
+    name
+  }
+}
+```
