@@ -389,7 +389,8 @@ https://www.udemy.com/course/react-redux/
   * initialize in React class component constructor
 * State & setState
   * always use this.setState({key: value})
-  * never do this.state = value
+  * never do 'this.state = value' when updating the state
+    * only exception to 'this.state = value' is when initializing the state 
   ```js
 	import React from 'react';
 	import ReactDOM from 'react-dom';
