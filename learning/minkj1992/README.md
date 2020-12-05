@@ -97,7 +97,7 @@ query {
 ```bash
 $ npx create-react-app hooks
 $ cd hooks
-$ yarn start
+$ npm start
 ```
 
 - packages

@@ -1,23 +1,13 @@
 import { useState } from 'react';
 
-export const useInput = (initialValue, validator) => {
-  const [value, setValue] = useState(initialValue);
-
-  const onChange = (e) => {
-    const {
-      target: { value },
-    } = e;
-
-    let willUpdate = true;
-    if (typeof validator === 'function') {
-      willUpdate = validator(value);
-    }
-    if (willUpdate) {
-      setValue(value);
-    } else {
-      console.log('validator activated');
-    }
+export const useTabs = (initialTab, allTabs) => {
+  const [curIdx, setCurIdx] = useState(initialTab);
+  // fail fast
+  if (!allTabs || !Array.isArray(allTabs)) {
+    return;
+  }
+  return {
+    curItem: allTabs[curIdx],
+    changeItem: setCurIdx,
   };
-
-  return { value, onChange };
 };

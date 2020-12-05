@@ -1,14 +1,27 @@
 import React from 'react';
-import { useInput } from './hook';
+import { useTabs } from './hook';
+
+const content = [
+  {
+    tab: 'Section 1',
+    content: 'This is the content of the Section 1',
+  },
+  {
+    tab: 'Section 2',
+    content: 'This is the content of the Section 2',
+  },
+];
 
 const App = () => {
-  const validator = (value) => !value.includes('@'); // validation condition, you can change this
-  const name = useInput('Mr.', validator);
+  const { curItem, changeItem } = useTabs(0, content);
 
   return (
     <div className="App">
-      <h1>UseInput</h1>
-      <input placeholder="Name" {...name} />
+      <h1>UseTabs</h1>
+      {content.map((section, idx) => (
+        <button onClick={() => changeItem(idx)}>{section.tab}</button>
+      ))}
+      <div>{curItem.content}</div>
     </div>
   );
 };
