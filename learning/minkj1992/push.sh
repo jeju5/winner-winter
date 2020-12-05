@@ -22,7 +22,5 @@ git push origin main
 
 # push to origin repo
 git fetch upstream
-git checkout upstream/leoo
-git merge main
-git push origin upstream/leoo
-git push
+git merge upstream/main
+git push upstream/main
