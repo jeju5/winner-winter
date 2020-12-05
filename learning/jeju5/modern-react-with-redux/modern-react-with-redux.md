@@ -482,8 +482,10 @@ https://www.udemy.com/course/react-redux/
   * Inside the constructor
     ```js
     class App extends React.Component {
+      // constructor
       constructor(prop) {
         super(prop);
+        // state init
         this.state = {
           latitude : null,
           errorMsg : null
@@ -504,5 +506,22 @@ https://www.udemy.com/course/react-redux/
         latitude : null,
         errorMsg : null
       };
+    }
+    ```
+* Do I need a constructor?
+  * If you try in babel, you will notice that 'state initalization outside of a constructor lets babel to create a constructor for you like this
+    ```js
+    /* babel try out with state-init outside the constructor */
+    
+    class App extends React.Component {
+      constructor(...args) {
+        super(...args);
+
+        _defineProperty(this, "state", {
+          latitude: null,
+          errorMsg: null
+        });
+      }
+
     }
     ```
