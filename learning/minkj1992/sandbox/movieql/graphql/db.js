@@ -1,48 +1,28 @@
-let movies = [
-  {
-    id: 0,
-    name: 'Star Wars - The new one',
-    score: 1,
-  },
-  {
-    id: 1,
-    name: 'Avengers - The new one',
-    score: 8,
-  },
-  {
-    id: 2,
-    name: 'The Godfather I',
-    score: 99,
-  },
-  {
-    id: 3,
-    name: 'Logan',
-    score: 2,
-  },
-];
+import axios from 'axios';
 
-export const getMovies = () => movies;
+const LIST_MOVIES_URL = 'https://yts.am/api/v2/list_movies.json?';
+const MOVIE_DETAILS_URL = 'https://yts.am/api/v2/movie_details.json';
 
-export const getById = (id) => {
-  const filteredMovies = movies.filter((m) => m.id === id);
-  return filteredMovies[0];
-};
-
-export const addMovie = (name, score) => {
-  const newMovie = {
-    id: `${movies.length + 1}`,
-    name,
-    score,
-  };
-  movies.push(newMovie);
-  return newMovie;
-};
-
-export const deleteMovie = (id) => {
-  const cleanedMovies = movies.filter((m) => m.id !== id);
-  if (movies.length > cleanedMovies.length) {
-    movies = cleanedMovies;
-    return true;
+// private
+const genURL = function (limit, rating) {
+  let REQUEST_URL = LIST_MOVIES_URL;
+  if (limit > 0) {
+    REQUEST_URL += `limit=${limit}`;
   }
-  return false;
+
+  if (rating > 0) {
+    REQUEST_URL += `&minimum_rating=${rating}`;
+  }
+  return REQUEST_URL;
+};
+
+export const getMovies = async (limit, rating) => {
+  let REQUEST_URL = genURL(limit, rating);
+
+  const {
+    data: {
+      data: { movies },
+    },
+  } = await axios(REQUEST_URL);
+  return movies;
 };
