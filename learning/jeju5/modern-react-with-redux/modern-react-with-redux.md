@@ -446,5 +446,35 @@ https://www.udemy.com/course/react-redux/
   * This is a method that calls at certain point of time with respect to life cycle of a component
   ```
   "constructed -> redered -> mounted -> updated -> unmounted"
-  "constructor -> reder() -> componentDidMount() -> componentDidUpdate() -> componentWillUnmount()"
+  ```
+  ```
+                           <use case>
+  constructor()           'good for onetime setup'
+  ↓
+  reder()                 'return jsx. don't do anything else'
+  ↓
+  componentDidMount()     'good for data loading'
+  ↓
+  componentDidUpdate()    'good for additional data loading upon state/props change'
+  ↓
+  componentWillUnmount()  'good for clean up; especially non-react stuff'
+  
+  * There are other lifecycle methods as well, but they are rarely used for specific cases. Ignore them for now.
+  ```
+* Use ComponentDidMount for data loading
+  ```js
+    componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+          this.setState({
+            latitude: position.coords.latitude
+          })
+      },
+      err => {
+        this.setState({
+          errorMsg: err.message
+        })
+      }
+    )
+  }
   ```
