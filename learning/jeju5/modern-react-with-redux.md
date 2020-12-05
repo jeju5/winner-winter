@@ -236,5 +236,11 @@ https://www.udemy.com/course/react-redux/
   * Let's use semantic-ui (get url from https://cdnjs.com/libraries/semantic-ui) and include it in index.html
     ```html
     /* index.html */
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     ```
+  * Let's install faker js for easy image import. When you do npm command you have to be in project level. npm install adds the package to your project. (not entire mac). After you do npm install, you will see that package in package.json and package-lock.json.
+    ```
+    npm install --save faker
+    ```
+
+  
