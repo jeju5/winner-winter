@@ -242,5 +242,24 @@ https://www.udemy.com/course/react-redux/
     ```
     npm install --save faker
     ```
-
-  
+  * When you find a jsx code that is duplicated or complicated, it is a good sign for creating a seperate component.
+    * create src/ComponentDetail.js (component file is ususally capitalized)
+  * Props: React system for passing property(=data) from Parent Component to Child Component
+    ```js
+    /* index.js */
+    App = () => {
+      ...
+      <CommentDetail author="SAM" date="Dec.1" />  /* you are passing author, date to ComponentDetail using Props system. */
+      <CommentDetail author="PAM" date="Dec.4" />
+      ...
+    }
+    ```
+    ```js
+    /* ComponentDetail.js */
+    const CommentDetail = props => {  /* you have to pass props to use Props system. */
+      ...
+      {props.author}
+      {props.date}
+      ...
+    }
+    ```
