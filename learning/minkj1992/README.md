@@ -39,3 +39,5 @@ $ yarn add babel-cli babel-preset-env babel-preset-stage-3 --dev
 $ yarn start
 ```
 
+- `vs_code GraphQL` 추가해주면 좋다.
+

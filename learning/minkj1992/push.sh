@@ -1,4 +1,5 @@
 #!/bin/sh
+CURRENT_CATEGORY='[GraphQL]'
 
 # If a command fails then the deploy stops
 set -e
@@ -21,17 +22,11 @@ msg="Update: study $(date)"
 if [ -n "$*" ]; then
 	msg="$*"
 fi
-git commit -m "$msg"
+git commit -m "$CURRENT_CATEGORY $msg"
 
 # push to forked my repo
 git push origin main
 
-
 # push to origin repo
 git fetch upstream
 git push upstream main
-
-
-# BASEDIR='./learning/minkj1992'
-# # back to proj dir
-# cd $BASEDIR
