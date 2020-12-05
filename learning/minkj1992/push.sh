@@ -1,5 +1,5 @@
 #!/bin/sh
-CURRENT_CATEGORY='[GraphQL]'
+CURRENT_CATEGORY='[React-Hooks]'
 
 # If a command fails then the deploy stops
 set -e
