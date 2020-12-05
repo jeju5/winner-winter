@@ -19,11 +19,21 @@ images: [https://source.unsplash.com/collection/1245/1200x628]
 const [value, setValue] = useState(initialValue);
 
 const onChange = (e) => {
+  
+  console.log(value); // value was used before it was defined
+
+  console.log(e.target.value) // "input값"
+
   const {
     target: { value },
   } = e;
+
+  console.log(value); // "input값"
 };
 ```
+
+> tl;dr 🤖🧠...
+>> `const { target: { value }, } = e;`는 useState로 생성해준 value에 e.target.value를 대입한 값이다. 즉 `value = event.target.value`
 
 - `const {k1, k2 ...} = value`는 객체구조분해로 ES6 문법입니다.
 - onChange 이벤트가 발생하면, e.target.value 값을 통하여 이벤트 객체에 담겨있는 현재의 텍스트 값을 읽어올 수 있습니다.
