@@ -441,3 +441,21 @@ https://www.udemy.com/course/react-redux/
     document.querySelector('#root')
   )
   ```
+# Section 6: Understanding Lifecycle Methods
+* What is LifeCycle Methods?
+  * This is a method that calls at certain point of time with respect to life cycle of a component
+  ```
+  "constructed -> redered -> mounted -> updated -> unmounted"
+  ```
+  ```
+  constructor
+  ↓
+  render
+  ↓ (component is visible = mounted) 
+  componentDidMount
+  ↓ (component is updated with data = updated)
+  componentDidUpdate
+  ↓ 
+  componentWillUnmount
+  ```
+
