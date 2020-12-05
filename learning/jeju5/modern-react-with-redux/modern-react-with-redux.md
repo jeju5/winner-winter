@@ -446,16 +446,5 @@ https://www.udemy.com/course/react-redux/
   * This is a method that calls at certain point of time with respect to life cycle of a component
   ```
   "constructed -> redered -> mounted -> updated -> unmounted"
+  "constructor -> reder() -> componentDidMount() -> componentDidUpdate() -> componentWillUnmount()"
   ```
-  ```
-  constructor
-  ↓
-  render
-  ↓ (component is visible = mounted) 
-  componentDidMount
-  ↓ (component is updated with data = updated)
-  componentDidUpdate
-  ↓ 
-  componentWillUnmount
-  ```
-
