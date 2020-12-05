@@ -508,6 +508,7 @@ https://www.udemy.com/course/react-redux/
       };
     }
     ```
+    * In this case constructor is not needed if there is no special logic in it because babel takes care of it.
 * Do I need a constructor?
   * If you try in babel, you will notice that 'state initalization outside of a constructor lets babel to create a constructor for you like this
     ```js
