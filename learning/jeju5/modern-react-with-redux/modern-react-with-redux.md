@@ -377,3 +377,39 @@ https://www.udemy.com/course/react-redux/
   ...
   ```
 # Section 5: State in React Components
+* How React State system work?
+  ```
+  1. Only usable with React Class Component (or React Functional Component with Hook)
+  2. State is a js object
+  3. updtaing state triggers Class Component to rerender itself.
+  4. State must be initialized when Class Component is created
+  5. State must be updated with 'setState'
+  ```
+* State initialization
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+
+	// constructor is automatically called with props
+	constructor(prop) {
+		super(prop);
+
+		this.state = { latitude : null };
+	}
+
+	render () {
+		return (
+				<div>
+				Latitude: {this.state.latitude}
+			</div>
+		);
+	}
+}
+
+ReactDOM.render(
+	<App />,
+	document.querySelector('#root')
+)
+```
