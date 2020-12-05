@@ -13,6 +13,19 @@ images: [https://source.unsplash.com/collection/1245/1200x628]
 - nodejs
 - react-native
 
+# `push.sh`
+> forked repo 와 upstream으로 push (auto fetch)
+
+```bash
+$ git remote add upstream https://github.com/[Original Owner].git
+$ sh push.sh "커밋 명령어"
+```
+
+- Category 설정
+```bash
+CURRENT_CATEGORY='[<현재 공부하는 카테고리>]'
+```
+
 # GraphQL
 
 - 환경 설정
