@@ -3,7 +3,7 @@ import resolvers from "./graphql/resolvers"
 
 const server = new GraphQLServer({
     typeDefs: "graphql/schema.graphql",
-    resolvers
+    resolvers,
 });
 
-server.start(() => console.log("GraphQL server is Running ..."));
+server.start(() => console.log('Server(GraphQL Playground) is running on http://127.0.0.1:4000'))

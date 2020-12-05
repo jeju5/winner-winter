@@ -27,6 +27,7 @@ CURRENT_CATEGORY='[<현재 공부하는 카테고리>]'
 ```
 
 # GraphQL
+> I Use [`graphql-yoga`](https://github.com/prisma-labs/graphql-yoga)
 
 - 환경 설정
 
@@ -53,4 +54,5 @@ $ yarn start
 ```
 
 - `vs_code GraphQL` 추가해주면 좋다.
+- Server(GraphQL Playground) on http://127.0.0.1:4000
 

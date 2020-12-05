@@ -25,3 +25,5 @@ images: [https://source.unsplash.com/collection/1245/1200x628]
   - GraphQL를 이용하면 이러한 많은 정보를 한번의 요청으로 해결 할 수 있다.
   - 내부적으로 dfs/bfs와 같은 완탐을 사용해 recursive하게 추가로 요청을 보내는 방식 일듯하다.
   - ex: 구매 서비스에 필요한, 유저데이터, 상품 데이터를 한번에 가져옴
+
+## Query & Mutation
