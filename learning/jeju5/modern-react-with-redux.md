@@ -233,3 +233,8 @@ https://www.udemy.com/course/react-redux/
       )
       ```
 # Section 3: Communicating with Props
+  * Let's use semantic-ui (get url from https://cdnjs.com/libraries/semantic-ui) and include it in index.html
+    ```html
+    /* index.html */
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js />
+    ```
