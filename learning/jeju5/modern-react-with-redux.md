@@ -233,33 +233,50 @@ https://www.udemy.com/course/react-redux/
       )
       ```
 # Section 3: Communicating with Props
-  * Let's use semantic-ui (get url from https://cdnjs.com/libraries/semantic-ui) and include it in index.html
-    ```html
-    /* index.html */
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-    ```
-  * Let's install faker js for easy image import. When you do npm command you have to be in project level. npm install adds the package to your project. (not entire mac). After you do npm install, you will see that package in package.json and package-lock.json.
-    ```
-    npm install --save faker
-    ```
-  * When you find a jsx code that is duplicated or complicated, it is a good sign for creating a seperate component.
-    * create src/ComponentDetail.js (component file is ususally capitalized)
-  * Props: React system for passing property(=data) from Parent Component to Child Component
-    ```js
-    /* index.js */
-    App = () => {
-      ...
-      <CommentDetail author="SAM" date="Dec.1" />  /* you are passing author, date to ComponentDetail using Props system. */
-      <CommentDetail author="PAM" date="Dec.4" />
-      ...
-    }
-    ```
-    ```js
-    /* ComponentDetail.js */
-    const CommentDetail = props => {  /* you have to pass props to use Props system. */
-      ...
-      {props.author}
-      {props.date}
-      ...
-    }
-    ```
+* Let's use semantic-ui (get url from https://cdnjs.com/libraries/semantic-ui) and include it in index.html
+  ```html
+  /* index.html */
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  ```
+* Let's install faker js for easy image import. When you do npm command you have to be in project level. npm install adds the package to your project. (not entire mac). After you do npm install, you will see that package in package.json and package-lock.json.
+  ```
+  npm install --save faker
+  ```
+* When you find a jsx code that is duplicated or complicated, it is a good sign for creating a seperate component.
+  * create src/ComponentDetail.js (component file is ususally capitalized)
+* Props: React system for passing property(=data) from Parent Component to Child Component
+  ```js
+  /* index.js */
+  App = () => {
+    ...
+    <CommentDetail author="SAM" date="Dec.1" />  /* you are passing author, date to ComponentDetail using Props system. */
+    <CommentDetail author="PAM" date="Dec.4" />
+    ...
+  }
+  ```
+  ```js
+  /* ComponentDetail.js */
+  const CommentDetail = props => {  /* you have to pass props to use Props system. */
+    ...
+    {props.author}
+    {props.date}
+    ...
+  }
+  ```
+* Passing component using Props. Just nest it.
+  ```js
+  /* index.js*/
+  <ApprovalCard>
+   <ComponentDetail />
+  </ApprovalCard>
+  ```
+  ```js
+  /* ApprovalCard.js*/
+  ...
+   {props.children}  /* just like value properties, component properties are passed into 'props' object. specifically 'props.children' */
+  ```
+  
+  
+  
+  
+  
