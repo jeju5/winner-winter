@@ -339,6 +339,7 @@ https://www.udemy.com/course/react-redux/
   ```js
   /* index.js */
   ...
+  
   const App = () => {
 
    window.navigator.geolocation.getCurrentPosition(
@@ -351,8 +352,8 @@ https://www.udemy.com/course/react-redux/
      Latitude:
     </div>
    );
+   
    ...
-  }
   ```
   * Now you want to put latitude in the jsx that App returns. However, it is tricky to wait for geolocation call before you render the UI.
 * Implementation with Class Component
@@ -362,6 +363,7 @@ https://www.udemy.com/course/react-redux/
   ```js
   /* index.js */
   ...
+  
   class App extends React.Component {
    render () {
     return (
@@ -371,5 +373,6 @@ https://www.udemy.com/course/react-redux/
     );
    }
   }
+  
   ...
   ```
