@@ -387,6 +387,7 @@ https://www.udemy.com/course/react-redux/
   ```
 * State initialization
   * initialize in React class component constructor
+  * don't forget to call 'super(prop)'
 * State & setState
   * always use this.setState({key: value})
   * never do 'this.state = value' when updating the state
