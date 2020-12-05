@@ -478,3 +478,31 @@ https://www.udemy.com/course/react-redux/
     )
   }
   ```
+* There are two ways of initializing state
+  * Inside the constructor
+    ```js
+    constructor(prop) {
+      super(prop);
+      this.state = {
+        latitude : null,
+        errorMsg : null
+      };
+    }
+    ```
+  * Outside the constructor
+    ```js
+    class App extends React.Component {
+
+      // constructor
+      constructor(prop) {
+        console.log("const")
+        super(prop);
+      }
+
+      // state initalization
+      state = {
+        latitude : null,
+        errorMsg : null
+      };
+    }
+    ```
