@@ -415,7 +415,7 @@ https://www.udemy.com/course/react-redux/
 	```
 * State & setState
 	* always use this.setState({key: value})
-	* never do this.state = ..
+	* never do this.state = value
 	```js
 	import React from 'react';
 	import ReactDOM from 'react-dom';
