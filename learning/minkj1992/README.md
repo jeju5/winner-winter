@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "README"
-categories: [""] # suggestion: books, dev, post, timeline, daily
+title: 'README'
+categories: [''] # suggestion: books, dev, post, timeline, daily
 date: 2020-12-05 14:53:08 +0900
-tags: 
+tags:
 draft: false
 toc: true
 images: [https://source.unsplash.com/collection/1245/1200x628]
@@ -14,6 +14,7 @@ images: [https://source.unsplash.com/collection/1245/1200x628]
 - react-native
 
 # `push.sh`
+
 > forked repo 와 upstream으로 push (auto fetch)
 
 ```bash
@@ -22,11 +23,13 @@ $ sh push.sh "커밋 명령어"
 ```
 
 - Category 설정
+
 ```bash
 CURRENT_CATEGORY='[<현재 공부하는 카테고리>]'
 ```
 
 # GraphQL
+
 > I Use [`graphql-yoga`](https://github.com/prisma-labs/graphql-yoga)
 
 - 환경 설정
@@ -45,7 +48,7 @@ question private:
 success Saved package.json
 
 $ yarn add graphql-yoga
-$ yarn global add nodemon # 스크립트 변경시 노드 서버(graphql-yoga) refresh 
+$ yarn global add nodemon # 스크립트 변경시 노드 서버(graphql-yoga) refresh
 $ yarn add babel-node --dev
 $ yarn global add babel-cli --ignore-engines
 # 실행 전에 .babelrc 생성
@@ -58,16 +61,25 @@ $ yarn start
 
 - Playground 쿼리 예시
 
-```Playground
+```json
 query {
-  people {
-    id,
-    gender,
-    name,
-    age,
-  },
-  person(id:8)  {
-    name
+
+	movie(id:24502){
+    title
+  }
+}
+
+query {
+	movies (limit:10){
+    id
+  	title
+    rating
+    summary
+    language
+    medium_cover_image
+  }
+	movie(id:24502){
+    title
   }
 }
 ```
