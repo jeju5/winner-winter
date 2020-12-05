@@ -243,7 +243,45 @@ https://www.udemy.com/course/react-redux/
   npm install --save faker
   ```
 * When you find a jsx code that is duplicated or complicated, it is a good sign for creating a seperate component.
-  * create src/ComponentDetail.js (component file is ususally capitalized)
+  * create src/ComponentDetail.js and export it(component file is ususally capitalized)
+    ```js
+    import React from 'react';
+
+    const CommentDetail = props => {
+     return (
+      <div className="comment">
+       <a href="/" className="avatar">
+        {/*
+         src={faker.image.avatar()} 
+         if faker doesn't work use src="https://source.unsplash.com/random"
+        */}
+        <img alt="avatar" src={props.img} />
+       </a>
+       <div className="content">
+        <a href="/" className="author">
+         {props.author}
+        </a>
+        <div className="metadata">
+         <span className="date">
+          {props.timeAgo}
+         </span>
+        </div>
+        <div className="text">
+         {props.text}
+        </div>
+       </div>
+      </div>
+     )
+    }
+
+    export default CommentDetail; // you need export statement so that you can import this component somewhere else
+    ```
+    ```js
+    /* index.js */
+    import ApprovalCard from './ApprovalCard';
+    ```
+  * Alternatively you could have defined this component in index.js as well.
+  * You can export more than 1 components within a js file.
 * Props: React system for passing property(=data) from Parent Component to Child Component
   ```js
   /* index.js */
