@@ -713,6 +713,7 @@ https://www.udemy.com/course/react-redux/
   }
   ```
 * How to use Event listener
+  * don't put () on eventhandler method. you are just passing the reference. If you put (). Then you are passing the method return of onInputChange method.
   ```
   class A extends React.Component {
     onInputChange() {
