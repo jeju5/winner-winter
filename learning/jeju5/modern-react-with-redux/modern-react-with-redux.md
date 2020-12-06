@@ -712,11 +712,11 @@ https://www.udemy.com/course/react-redux/
     }
   }
   ```
-* How to use Event listener
-  * don't put () on eventhandler method. you are just passing the reference. If you put (). Then you are passing the method return of onInputChange method.
-  ```
+* How to use Event callback method
+  * don't put () on event callback method. you are just passing the reference. If you put (). Then you are passing the method return of onInputChange method.
+  ```js
   class A extends React.Component {
-    onInputChange() {
+    onInputChange(event) {
      //
     }
 
@@ -726,4 +726,10 @@ https://www.udemy.com/course/react-redux/
       ...
     }
   }
+  ```
+  * Alternatively you can use arrow function for onEvent method
+  ```js
+  ...
+  <input type="text" onChange={(e)=>{console.log(e);}/>
+  ...
   ```
