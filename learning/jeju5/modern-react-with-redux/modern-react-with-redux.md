@@ -794,7 +794,11 @@ https://www.udemy.com/course/react-redux/
     ```js
     class Car {
       constructor() {
-        // you are saying that 'fix 
+        /*
+        How bind method works.
+        f.bind(B)
+        returns B.f where B is binded to f.
+        */
         this.drive = this.drive.bind(this);
       }
     
@@ -807,19 +811,35 @@ https://www.udemy.com/course/react-redux/
       }
     ```
   * use arrow function (feature of arrow function is it binds 'this' to original instance)
+    * why define arrow function in constructor? Arrow function doesn't have this scope by nature. You can put arrow function in constructor to give this scope.
+    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+    * In short: since arrow function doesn't have its own scope. When it sees 'this' it refers to the context it is in. When you created inside of constructor, it is referencing to class.
     ```js
     class Car {
-    
+      constructor() {
+        this.drive = () => {
+          return this.sound;
+        }
+      }
       setDriveSound(sound) {
         this.sound = sound;
       }
-
-      drive() => {
-       return this.sound;
+    }
+    ```
+  * in context of our React project (two ways)
+    ```js
+    class SearchBar extends React.Component  {
+      onFormSubmit = (event) => {
+        console.log(this.state.term);
+      }
+      
+      render() {
+       ...
+        <form className="ui form" onSubmit={() => {this.onFormSubmit}}>
+       ...
       }
     }
     ```
-  * variation of arrow function solution
     ```js
     class SearchBar extends React.Component  {
       onFormSubmit(event) {
@@ -829,7 +849,7 @@ https://www.udemy.com/course/react-redux/
       
       render() {
        ...
-        <form className="ui form" onSubmit={() => {this.onFormSubmit}}>
+        <form className="ui form" onSubmit={() => {this.onFormSubmit()}}>
        ...
       }
     }
