@@ -735,11 +735,11 @@ https://www.udemy.com/course/react-redux/
   ```
 * Controlled vs Uncontrolled?
   * Controlled Element: Store data in the react (preferable because you want to manage data with React)
-    ```
+    ```js
     <input value={this.state.term} onChange{ (event) => {this.setState{term: event.target.value}} } />
     ```
   * Uncontrolled Element: Store data in the DOM
-    ```
+    ```js
     <input value="my value" />
     ```
   
