@@ -712,3 +712,17 @@ https://www.udemy.com/course/react-redux/
     }
   }
   ```
+* How to use Event listener
+  ```
+  class A extends React.Component {
+    onInputChange() {
+     //
+    }
+
+    render() {
+      ...
+      <input type="text" onChange={this.onInputChange}/>
+      ...
+    }
+  }
+  ```
