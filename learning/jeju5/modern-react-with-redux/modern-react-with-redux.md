@@ -693,8 +693,8 @@ https://www.udemy.com/course/react-redux/
   ```
 * Class Component: Define a javascript class that
   * 1) extends React.Component
-  * 2) initalizes State
-  * 3) implements render()
+  * 2) implements render() that returns jsx.
+  * 3) initalizes State. (state init is optional)
   ```js
   class App extends React.Component {
     // state initalization
