@@ -923,7 +923,6 @@ https://www.udemy.com/course/react-redux/
         }
       }
     );
-
     console.log(response.data.results);
   }
   ```
