@@ -743,3 +743,49 @@ https://www.udemy.com/course/react-redux/
     <input value="my value" />
     ```
   
+* what is 'this' in javascript?
+  * 'this' references the 'leftside of period'
+    ```js
+    class Car {
+      setDriveSound(sound) {
+        this.sound = sound;
+      }
+
+      drive() {
+       return this.sound;
+      }
+    }
+
+    const car = new Car();
+    car.setDriveSound("vroom");
+
+    // this returns "vroom" becase what is leftside of .drive()?  It is car.
+    car.drive();    
+
+    // javascript class is simply a javascript object in certain form
+    // You don't have to go through new keyword.
+    const truck = {
+      sound : "put!put!"
+      driveMyTruck: car.drive // driveMyTruck is simply a reference to drive method. (context of car is gone)
+
+    // this returns "put!put!"
+    // truck.driveMyTruck() = truck.'reference to drive method in car' = truck.drive()
+    // truck is borrowing car.drive method. 
+    truck.driveMyTruck()
+    ```
+  * Problem with this.state
+    * When you submit a form, the onFormSubmit is called as onFormSubmit(). Then the context of 'this' is lost at this point.
+    ```js
+    class SearchBar extends React.Component  {
+      onFormSubmit(event) {
+        event.preventDefault(); 
+        console.log(this.state.term);
+      }
+      
+      render() {
+       ...
+        <form className="ui form" onSubmit={this.onFormSubmit}>
+       ...
+      }
+    }
+    ```
