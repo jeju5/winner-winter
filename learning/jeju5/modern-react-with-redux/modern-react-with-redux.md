@@ -663,3 +663,4 @@ https://www.udemy.com/course/react-redux/
 
   export default SeasonDisplay;
   ```
+# Section 7: Handling User Input with Forms and Events
