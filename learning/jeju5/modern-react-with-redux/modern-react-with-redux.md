@@ -789,3 +789,32 @@ https://www.udemy.com/course/react-redux/
       }
     }
     ```
+* solution with 'this'
+  * bind the method in constructor
+    ```js
+    class Car {
+      constructor() {
+        // you are saying that 'fix 
+        this.drive = this.drive.bind(this);
+      }
+    
+      setDriveSound(sound) {
+        this.sound = sound;
+      }
+
+      drive() {
+       return this.sound;
+      }
+    ```
+  * use arrow function (feature of arrow function is it binds 'this' to original instance)
+    ```
+    class Car {
+    
+      setDriveSound(sound) {
+        this.sound = sound;
+      }
+
+      drive() => {
+       return this.sound;
+      }
+    ```
