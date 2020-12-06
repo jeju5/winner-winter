@@ -810,10 +810,10 @@ https://www.udemy.com/course/react-redux/
        return this.sound;
       }
     ```
-  * use arrow function (feature of arrow function is it binds 'this' to original instance)
-    * why define arrow function in constructor? Arrow function doesn't have this scope by nature. You can put arrow function in constructor to give this scope.
+  * use arrow function (feature of arrow function doesn't have `this` by nature and finds `this` from where it is defined)
     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-    * In short: since arrow function doesn't have its own scope. When it sees 'this' it refers to the context it is in. When you created inside of constructor, it is referencing to class.
+    * why define arrow function in constructor? Arrow function doesn't have `this` by nature. You can put arrow function in constructor to give this scope.
+    * In short: since arrow function doesn't have `this` it takes `this` as where it is defined. When you created inside of constructor, it is referencing to class.
     ```js
     class Car {
       constructor() {
@@ -965,3 +965,5 @@ https://www.udemy.com/course/react-redux/
   }
   ```
 
+# Section 9: Building Lists of Records
+* 
