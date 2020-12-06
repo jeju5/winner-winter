@@ -926,8 +926,14 @@ https://www.udemy.com/course/react-redux/
     console.log(response.data.results);
   }
   ```
-* problem with naive approach to setState.
+* problem with naive approach to call back.
   * The code below throws an error because the caller of `this` in `setState` is `props` from `this.props.onSearchBarSubmit(this.state.term);` 
+  ```js
+  onFormSubmit = (event) => {
+    event.preventDefault(); 
+    this.props.onSearchBarSubmit(this.state.term);
+  }
+  ```
   ```js
   async onSearchBarSubmit(term) {
     const response = await axios.get(
@@ -947,9 +953,15 @@ https://www.udemy.com/course/react-redux/
   ...
   <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
   ```
+* solution: binding!
+  * since arrow function doesn't have `this`. It finds `this` from where the arrow function is defined.
+  * note how you put async on arrow function.
   ```js
-  onFormSubmit = (event) => {
-    event.preventDefault(); 
-    this.props.onSearchBarSubmit(this.state.term);
+  async onSearchBarSubmit = async (term) => {
+    ...
+    this.setState({
+      images: response.data.results
+    });
   }
   ```
+
