@@ -881,6 +881,11 @@ https://www.udemy.com/course/react-redux/
     }
   }
   ```
+* So current flow is
+  * Change Input
+  * 'OnChange()' does setState
+  * state update triggers render()
+  * input is created with a value from a state `value={this.state.term}` (and of course input is newly created thus doesn't call onChange, creating infinite loops)
   
 # Section 8: Making API Requests with React
 * you can create APIs in `unsplash.com` for development purposes.
