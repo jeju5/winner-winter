@@ -894,4 +894,37 @@ https://www.udemy.com/course/react-redux/
   ```
   npm install --save axios
   ```
+* making api request without `async` keyword
+  ```js
+  onSearchBarSubmit(term) {
+    const response = axios.get(
+      'https://api.unsplash.com/search/photos',
+      {
+        params: { query: term},
+        headers: {
+          Authorization: 'Client-ID 29438u02398u4032'
+        }
+      }
+    ).then((response) => {
+      console.log(response.data.results);
+      ...
+    })
+  }
+  ```
+* method with `async` and `await` keyword 
+  ```js
+    async onSearchBarSubmit(term) {
+    const response = await axios.get(
+      'https://api.unsplash.com/search/photos',
+      {
+        params: { query: term},
+        headers: {
+          Authorization: 'Client-ID 29438u02398u4032'
+        }
+      }
+    );
+
+    console.log(response.data.results);
+  }
+  ```
   
