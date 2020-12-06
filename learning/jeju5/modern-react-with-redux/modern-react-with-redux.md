@@ -926,4 +926,30 @@ https://www.udemy.com/course/react-redux/
     console.log(response.data.results);
   }
   ```
-  
+* problem with naive approach to setState.
+  * The code below throws an error because the caller of `this` in `setState` is `props` from `this.props.onSearchBarSubmit(this.state.term);` 
+  ```js
+  async onSearchBarSubmit(term) {
+    const response = await axios.get(
+      'https://api.unsplash.com/search/photos',
+      {
+        params: { query: term},
+        headers: {
+          Authorization: 'Client-ID Lj6c2xq0LVwuufH0l0yLy8o63Kop_IUBSY9mQf7boXY'
+        }
+      }
+    );
+
+    this.setState({
+      images: response.data.results
+    });
+  }
+  ...
+  <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+  ```
+  ```js
+  onFormSubmit = (event) => {
+    event.preventDefault(); 
+    this.props.onSearchBarSubmit(this.state.term);
+  }
+  ```
