@@ -882,3 +882,11 @@ https://www.udemy.com/course/react-redux/
   }
   ```
   
+# Section 8: Making API Requests with React
+* you can create APIs in `unsplash.com` for development purposes.
+* Two common ways of using APIs in React is by axios(3rd package) or fetch(built into modern browser).
+  * fetch is very low-level. axios is preferred.
+  ```
+  npm install --save axios
+  ```
+  
