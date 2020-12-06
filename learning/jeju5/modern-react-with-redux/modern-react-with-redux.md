@@ -807,7 +807,7 @@ https://www.udemy.com/course/react-redux/
       }
     ```
   * use arrow function (feature of arrow function is it binds 'this' to original instance)
-    ```
+    ```js
     class Car {
     
       setDriveSound(sound) {
@@ -817,4 +817,20 @@ https://www.udemy.com/course/react-redux/
       drive() => {
        return this.sound;
       }
+    }
+    ```
+  * variation of arrow function solution
+    ```js
+    class SearchBar extends React.Component  {
+      onFormSubmit(event) {
+        event.preventDefault(); 
+        console.log(this.state.term);
+      }
+      
+      render() {
+       ...
+        <form className="ui form" onSubmit={() => {this.onFormSubmit}}>
+       ...
+      }
+    }
     ```
