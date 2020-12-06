@@ -115,9 +115,9 @@ https://www.udemy.com/course/react-redux/
   ```
   <4 RULES>
   1. 'double curly' the double quote.
-  2. 'camel case' the hyphen
-  3. 'comma or remove' the semicolon
-  4. 'single quote' the property
+  2. 'camel case' the hyphen in the property name.
+  3. 'single quote' the property value.
+  4. 'comma or remove' the semicolon
   ```
   * HTML
     ```html
@@ -131,7 +131,7 @@ https://www.udemy.com/course/react-redux/
     * javascript doesn't differentiate ' and ".
     * By convention in the community
       * Single quote the non-jsx property.
-      * Double quote the jsx property.
+      * Double quote the jsx property. (I think it is better to double quote everything because some js syntax requires double quote anyway)
         ```js
         const App = () => {
          return (
