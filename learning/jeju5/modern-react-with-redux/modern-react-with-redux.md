@@ -854,3 +854,31 @@ https://www.udemy.com/course/react-redux/
       }
     }
     ```
+* Invoking callbacks from child to parent
+  ```js
+  class App extends React.Component {
+
+    onSearchBarSubmit(term) {
+      console.log(term);
+    }
+
+
+    render() {
+      return (
+        <div className="ui container" style={{ marginTop: '20px'}}>
+          <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+        </div>
+      )
+    }
+  }
+  ```
+  ```js
+  class SearchBar extends React.Component  {
+    ...
+    onFormSubmit = (event) => {
+      event.preventDefault(); 
+      this.props.onSearchBarSubmit(this.state.term);
+    }
+  }
+  ```
+  
