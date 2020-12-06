@@ -664,3 +664,51 @@ https://www.udemy.com/course/react-redux/
   export default SeasonDisplay;
   ```
 # Section 7: Handling User Input with Forms and Events
+* initial components are not necessarily have to be defined in index.js
+  ```js
+  import React from 'react';
+  import ReactDOM from 'react-dom';
+
+  import App from './components/App';
+
+  ReactDOM.render(
+    <App />,
+    Document.querySelector('#root')
+  );
+  ```
+  * what's essential in index.js is 'ReactDOM.render()'
+  * index.js is for 'initial rendering'
+* Functional Component vs Class Component (Syntax)
+  * Functional Component: Define a javascript function that returns jsx.
+  ```js
+  import React from 'react';
+
+  const App = () => {
+    return (
+      <div>App</div>
+    )
+  }
+
+  export default SearchBar;
+  ```
+* Class Component: Define a javascript class that
+  * 1) extends React.Component
+  * 2) initalizes State
+  * 3) implements render()
+  ```js
+  class App extends React.Component {
+    // state initalization
+    state = {
+      key1 : val1,
+      key2 : val2
+    };
+
+    componentDidMount() {
+     //
+    }
+    
+    render() {
+     // 
+    }
+  }
+  ```
