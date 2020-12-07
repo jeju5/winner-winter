@@ -1176,3 +1176,19 @@ https://www.udemy.com/course/react-redux/
   export default ImageCard;
   ```
   
+# Section 11: Let's Test Your React Mastery!
+* Skipped
+
+# Section 12: Understanding Hooks in React
+* There are two types of hooks: Primitive Hooks & Custom Hooks (naming is not official but it helps understand the concept)
+* You can take props by destructuring
+  ```js
+  <Accordion items={items} titles={titles}/>
+  ```
+  ```js
+  const Accordion = ({ items, titles }) => {
+   return(
+    ...
+   );
+  }
+  ```
