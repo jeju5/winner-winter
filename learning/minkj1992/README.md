@@ -103,9 +103,9 @@ $ npm start
 - packages
   - [x] useInput
   - [x] useTabs
-  - [ ] useTitle
-  - [ ] usePageLeave
+  - [x] useTitle
   - [ ] useClick
+  - [ ] usePageLeave
   - [ ] useFadeIn
   - [ ] useFullscreen
   - [ ] useHover

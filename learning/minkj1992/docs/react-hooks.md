@@ -111,4 +111,19 @@ const { curItem, changeItem } = useTabs(0, content);
 ```
 다음과 같이 해주어서 curItem이 계속 undefined으로 처리되었다...🔥🔥🔥🔥
 
+## useState
 
+## useEffect
+
+- `componentDidMount`
+  - deps 유무 상관 없이 작동
+- `componentWillUpdate` (props 또는 state가 변경되었을 때, 재랜더링을 여부를 return 값으로 결정한다.)
+  - 1. `useEffect(sayHello);`
+    - deps 가 존재하지 않는다면, run the effect every time.
+  - 2. `useEffect(sayHello, []);`
+    - deps에 empty list이면, 초기화 때만 동작
+  - 3. `useEffect(sayHello, [num1, num2]);`
+    - `num1`, `num2`가 변경될 때만 동작
+- `componentWillUnmount`
+
+## useRef
