@@ -1100,4 +1100,23 @@ https://www.udemy.com/course/react-redux/
 
       export default ImageCard;
       ```
-      
+* After ImageCard is loaded, let's get the height of each img
+  ```js
+  componentDidMount() {
+    console.log(this.imageRef); // imageReft is { current: img }
+    console.log(this.imageRef.current.clientHeight);
+  }
+  ```
+  * If you take a look at the result of console logs, you will see 0s. It is because even though ImageCard is mounted on UI, img is not mounted yet.
+* Let's add a listener on img
+  ```
+  componentDidMount() {
+    // imageRef.current is <img>. Let's add a 'load' listener on the <img>
+    this.imageRef.current.addEventListener('load', this.setSpans);
+  }
+  
+  setSpans = () => {
+    // call back function
+  }
+  ```
+  
