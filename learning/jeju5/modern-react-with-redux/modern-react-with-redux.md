@@ -115,9 +115,9 @@ https://www.udemy.com/course/react-redux/
   ```
   <4 RULES>
   1. 'double curly' the double quote.
-  2. 'camel case' the hyphen
-  3. 'comma or remove' the semicolon
-  4. 'single quote' the property
+  2. 'camel case' the hyphen in the property name.
+  3. 'single quote' the property value.
+  4. 'comma or remove' the semicolon
   ```
   * HTML
     ```html
@@ -131,7 +131,7 @@ https://www.udemy.com/course/react-redux/
     * javascript doesn't differentiate ' and ".
     * By convention in the community
       * Single quote the non-jsx property.
-      * Double quote the jsx property.
+      * Double quote the jsx property. (I think it is better to double quote everything because some js syntax requires double quote anyway)
         ```js
         const App = () => {
          return (
@@ -441,3 +441,562 @@ https://www.udemy.com/course/react-redux/
     document.querySelector('#root')
   )
   ```
+# Section 6: Understanding Lifecycle Methods
+* What is LifeCycle Methods?
+  * This is a method that calls at certain point of time with respect to life cycle of a component
+  ```
+  "constructed -> redered -> mounted -> updated -> unmounted"
+  ```
+  ```
+                           <use case>
+  constructor()           'good for onetime setup'
+  ↓
+  reder()                 'return jsx. don't do anything else'
+  ↓
+  componentDidMount()     'good for data loading'
+  ↓
+  componentDidUpdate()    'good for additional data loading upon state/props change'
+  ↓
+  componentWillUnmount()  'good for clean up; especially non-react stuff'
+  
+  * There are other lifecycle methods as well, but they are rarely used for specific cases. Ignore them for now.
+  ```
+* Use ComponentDidMount for data loading
+  ```js
+    componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+          this.setState({
+            latitude: position.coords.latitude
+          })
+      },
+      err => {
+        this.setState({
+          errorMsg: err.message
+        })
+      }
+    )
+  }
+  ```
+* There are two ways of initializing state
+  * Inside the constructor
+    ```js
+    class App extends React.Component {
+      // constructor
+      constructor(prop) {
+        super(prop);
+        // state init
+        this.state = {
+          latitude : null,
+          errorMsg : null
+        };
+      }
+    }
+    ```
+  * Outside the constructor
+    ```js
+    class App extends React.Component {
+      // constructor
+      constructor(prop) {
+        super(prop);
+      }
+
+      // state initalization
+      state = {
+        latitude : null,
+        errorMsg : null
+      };
+    }
+    ```
+    * In this case constructor is not needed if there is no special logic in it because babel takes care of it.
+* Do I need a constructor?
+  * If you try in babel, you will notice that 'state initalization outside of a constructor lets babel to create a constructor for you like this
+    ```js
+    /* babel try out with state-init outside the constructor */
+    
+    class App extends React.Component {
+      constructor(...args) {
+        super(...args);
+
+        _defineProperty(this, "state", {
+          latitude: null,
+          errorMsg: null
+        });
+      }
+
+    }
+    ```
+* What is default props?
+  * you can define a 'defaultProps' at component level. This is used when props is not passed from parent component.
+  ```js
+  import React from 'react';
+
+  const Spinner = (props) => {
+      return (
+        <div className="ui active dimmer">
+          <div className="ui big text loader">{props.message}</div>
+        </div>
+      ) 
+  }
+
+  // default props
+  Spinner.defaultProps = {
+    message: "Default Props: Loading..."
+  };
+
+  export default Spinner;
+  ```
+* index.js
+  ```js
+  import React from 'react';
+  import ReactDOM from 'react-dom';
+  import SeasonDisplay from './SeasonDisplay';
+  import Spinner from './Spinner';
+
+  import "semantic-ui-css/semantic.min.css";
+
+  class App extends React.Component {
+    // state initalization
+    state = {
+      latitude : null,
+      errorMsg : null
+    };
+
+    componentDidMount() {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+            this.setState({
+              latitude: position.coords.latitude
+            })
+        },
+        err => {
+          this.setState({
+            errorMsg: err.message
+          })
+        }
+      )
+    }
+
+    /*
+    inside the React Class, defining a function is a little different
+    you don't define like a vanila javascript. you follow React rules. 
+
+    methodName(param1, param2) {
+      ///
+    }
+    */
+    renderContent() {
+      if (this.state.latitude) {
+        return <SeasonDisplay latitude = {this.state.latitude} />
+
+      } else if (this.state.errorMsg) {
+        return <div>Error: {this.state.errorMsg}</div>
+
+      } else {
+        return <Spinner message="Please Accept the location request" />
+
+      }
+    }
+
+    render() {
+      console.log("render");
+
+      return (
+        <div className="index">
+          {this.renderContent()}
+        </div>
+      )
+
+    }
+  }
+
+  ReactDOM.render(
+    <App />,
+    document.querySelector('#root')
+  )
+  ```
+* ScreenDisplay.js
+  ```js
+  import './SeasonDisplay.css';
+  import React from 'react';
+
+
+  const seasonConfig = {
+   summer : {
+    seasonMsg: "Let's hit the beach",
+    iconName: "sun"
+   },
+   winter : {
+    seasonMsg: "Let's build a snowman",
+    iconName: "snowflake"
+   },
+  }
+
+  const getSeason = (lat, month) => {
+   //  Northern hemisphere == positive latitude
+   const isNorthernHemisPhere = 0 < lat;
+
+   if (2 < month && month < 9) {
+    // Mar ~ Aug: Northern hemisphere is summer
+    return isNorthernHemisPhere ? 'summer' : 'winter';
+   } else {
+    // Sep ~ Feb: Norther hemisphere is winter
+    return isNorthernHemisPhere ? 'winter' : 'summer';
+   }
+  }
+
+  const SeasonDisplay = (props) => {
+   const season = getSeason(props.latitude, new Date().getMonth());
+   console.log(props.latitude);
+   console.log(season);
+
+   const {seasonMsg, iconName} = seasonConfig[season];               /* js: how to assign many variable from object */
+
+   return (
+    <div className={`season-display ${season}`}>              {/* good practice: highest container's className and component's name match */}
+     <i className={`massive ${iconName} icon icon-left`} />  {/* backtick and dollar allows you to inject string variable inside the string */}
+     <h1>{seasonMsg}</h1>
+     <i className={`massive ${iconName} icon icon-right`} />
+    </div>
+   );
+  }
+
+  export default SeasonDisplay;
+  ```
+# Section 7: Handling User Input with Forms and Events
+* initial components are not necessarily have to be defined in index.js
+  ```js
+  import React from 'react';
+  import ReactDOM from 'react-dom';
+
+  import App from './components/App';
+
+  ReactDOM.render(
+    <App />,
+    Document.querySelector('#root')
+  );
+  ```
+  * what's essential in index.js is 'ReactDOM.render()'
+  * index.js is for 'initial rendering'
+* Functional Component vs Class Component (Syntax)
+  * Functional Component: Define a javascript function that returns jsx.
+  ```js
+  import React from 'react';
+
+  const App = () => {
+    return (
+      <div>App</div>
+    )
+  }
+
+  export default SearchBar;
+  ```
+* Class Component: Define a javascript class that
+  * 1) extends React.Component
+  * 2) implements render() that returns jsx.
+  * 3) initalizes State. (state init is optional)
+  ```js
+  class App extends React.Component {
+    // state initalization
+    state = {
+      key1 : val1,
+      key2 : val2
+    };
+
+    componentDidMount() {
+     //
+    }
+    
+    render() {
+     // 
+    }
+  }
+  ```
+* How to use Event callback method
+  * don't put () on event callback method. you are just passing the reference. If you put (). Then you are passing the method return of onInputChange method.
+  ```js
+  class A extends React.Component {
+    onInputChange(event) {
+     //
+    }
+
+    render() {
+      ...
+      <input type="text" onChange={this.onInputChange}/>
+      ...
+    }
+  }
+  ```
+  * Alternatively you can use arrow function for onEvent method
+  ```js
+  ...
+  <input type="text" onChange={(e)=>{console.log(e);}/>
+  ...
+  ```
+* Controlled vs Uncontrolled?
+  * Controlled Element: Store data in the react (preferable because you want to manage data with React)
+    ```js
+    <input value={this.state.term} onChange{ (event) => {this.setState{term: event.target.value}} } />
+    ```
+  * Uncontrolled Element: Store data in the DOM
+    ```js
+    <input value="my value" />
+    ```
+  
+* what is 'this' in javascript?
+  * 'this' references the 'leftside of period'
+    ```js
+    class Car {
+      setDriveSound(sound) {
+        this.sound = sound;
+      }
+
+      drive() {
+       return this.sound;
+      }
+    }
+
+    const car = new Car();
+    car.setDriveSound("vroom");
+
+    // this returns "vroom" becase what is leftside of .drive()?  It is car.
+    car.drive();    
+
+    // javascript class is simply a javascript object in certain form
+    // You don't have to go through new keyword.
+    const truck = {
+      sound : "put!put!"
+      driveMyTruck: car.drive // driveMyTruck is simply a reference to drive method. (context of car is gone)
+
+    // this returns "put!put!"
+    // truck.driveMyTruck() = truck.'reference to drive method in car' = truck.drive()
+    // truck is borrowing car.drive method. 
+    truck.driveMyTruck()
+    ```
+  * Problem with this.state
+    * When you submit a form, the onFormSubmit is called as onFormSubmit(). Then the context of 'this' is lost at this point.
+    ```js
+    class SearchBar extends React.Component  {
+      onFormSubmit(event) {
+        event.preventDefault(); 
+        console.log(this.state.term);
+      }
+      
+      render() {
+       ...
+        <form className="ui form" onSubmit={this.onFormSubmit}>
+       ...
+      }
+    }
+    ```
+* solution with 'this'
+  * bind the method in constructor
+    ```js
+    class Car {
+      constructor() {
+        /*
+        How bind method works.
+        f.bind(B)
+        returns B.f where B is binded to f.
+        */
+        this.drive = this.drive.bind(this);
+      }
+    
+      setDriveSound(sound) {
+        this.sound = sound;
+      }
+
+      drive() {
+       return this.sound;
+      }
+    ```
+  * use arrow function (feature of arrow function doesn't have `this` by nature and finds `this` from where it is defined)
+    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+    * why define arrow function in constructor? Arrow function doesn't have `this` by nature. You can put arrow function in constructor to give this scope.
+    * In short: since arrow function doesn't have `this` it takes `this` as where it is defined. When you created inside of constructor, it is referencing to class.
+    ```js
+    class Car {
+      constructor() {
+        this.drive = () => {
+          return this.sound;
+        }
+      }
+      setDriveSound(sound) {
+        this.sound = sound;
+      }
+    }
+    ```
+  * in context of our React project (two ways)
+    ```js
+    class SearchBar extends React.Component  {
+      onFormSubmit = (event) => {
+        console.log(this.state.term);
+      }
+      
+      render() {
+       ...
+        <form className="ui form" onSubmit={() => {this.onFormSubmit}}>
+       ...
+      }
+    }
+    ```
+    ```js
+    class SearchBar extends React.Component  {
+      onFormSubmit(event) {
+        event.preventDefault(); 
+        console.log(this.state.term);
+      }
+      
+      render() {
+       ...
+        <form className="ui form" onSubmit={() => {this.onFormSubmit()}}>
+       ...
+      }
+    }
+    ```
+* Invoking callbacks from child to parent
+  ```js
+  class App extends React.Component {
+
+    onSearchBarSubmit(term) {
+      console.log(term);
+    }
+
+
+    render() {
+      return (
+        <div className="ui container" style={{ marginTop: '20px'}}>
+          <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+        </div>
+      )
+    }
+  }
+  ```
+  ```js
+  class SearchBar extends React.Component  {
+    ...
+    onFormSubmit = (event) => {
+      event.preventDefault(); 
+      this.props.onSearchBarSubmit(this.state.term);
+    }
+  }
+  ```
+* So current flow is
+  * Change Input
+  * 'OnChange()' does setState
+  * state update triggers render()
+  * input is created with a value from a state `value={this.state.term}` (and of course input is newly created thus doesn't call onChange, creating infinite loops)
+  
+# Section 8: Making API Requests with React
+* you can create APIs in `unsplash.com` for development purposes.
+* Two common ways of using APIs in React is by axios(3rd package) or fetch(built into modern browser).
+  * fetch is very low-level. axios is preferred.
+  ```
+  npm install --save axios
+  ```
+* making api request without `async` keyword
+  ```js
+  onSearchBarSubmit(term) {
+    const response = axios.get(
+      'https://api.unsplash.com/search/photos',
+      {
+        params: { query: term},
+        headers: {
+          Authorization: 'Client-ID 29438u02398u4032'
+        }
+      }
+    ).then((response) => {
+      console.log(response.data.results);
+      ...
+    })
+  }
+  ```
+* method with `async` and `await` keyword 
+  ```js
+    async onSearchBarSubmit(term) {
+    const response = await axios.get(
+      'https://api.unsplash.com/search/photos',
+      {
+        params: { query: term},
+        headers: {
+          Authorization: 'Client-ID 29438u02398u4032'
+        }
+      }
+    );
+    console.log(response.data.results);
+  }
+  ```
+* problem with naive approach to call back.
+  * The code below throws an error because the caller of `this` in `setState` is `props` from `this.props.onSearchBarSubmit(this.state.term);` 
+  ```js
+  onFormSubmit = (event) => {
+    event.preventDefault(); 
+    this.props.onSearchBarSubmit(this.state.term);
+  }
+  ```
+  ```js
+  async onSearchBarSubmit(term) {
+    const response = await axios.get(
+      'https://api.unsplash.com/search/photos',
+      {
+        params: { query: term},
+        headers: {
+          Authorization: 'Client-ID Lj6c2xq0LVwuufH0l0yLy8o63Kop_IUBSY9mQf7boXY'
+        }
+      }
+    );
+
+    this.setState({
+      images: response.data.results
+    });
+  }
+  ...
+  <SearchBar onSearchBarSubmit={this.onSearchBarSubmit}/>
+  ```
+* solution: binding!
+  * since arrow function doesn't have `this`. It finds `this` from where the arrow function is defined.
+  * note how you put async on arrow function.
+  ```js
+  async onSearchBarSubmit = async (term) => {
+    ...
+    this.setState({
+      images: response.data.results
+    });
+  }
+  ```
+
+# Section 9: Building Lists of Records
+* `key` in react.
+  * Consider a list of 30 divs and showing 3divs in UI. now you have to include 1div to UI, showing 4divs. React has to have a identifier for each div to properly and efficiently manage divs. `key` acts as an identifier for each DOM element (<div> in this case)
+  ```js
+  import React from 'react';
+
+  const ImageList = (props) => {
+
+    const images = props.images.map( (i) => {
+      return <img key={i.id} src={i.urls.regular} alt={`alt ${i.id}`}/>
+    });
+
+    return (
+    <div>
+      <div>Image List</div>
+      {images}
+    </div>);
+  };
+
+  export default ImageList;
+  ```
+* destructure in js: you can destructure any js object with property names. (note how `i` is destructured)
+  ```js
+  const images = props.images.map( (i) => {
+    return <img key={i.id} src={i.urls.regular} alt={`alt ${i.desciption}`}/>
+  });
+  ```
+  ```js
+  const images = props.images.map( ({id, urls, desciption}) => {
+    return <img key={id} src={urls.regular} alt={`alt ${desciption}`}/>
+  });
+  ```
+  
+  
+   
