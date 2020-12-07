@@ -998,5 +998,47 @@ https://www.udemy.com/course/react-redux/
   });
   ```
   
-  
-   
+# Section 10: Using Ref's for DOM Access
+* Importing css file
+  * look at import statement `import './ImageList.css';`. unlike importing a component, you are importing a file.
+  * look at how you name the className of highest container (However, naming is just recommendation)
+  ```js
+  // src/components/ImageList.js
+  import React from 'react';
+  import './ImageList.css';
+
+  const ImageList = (props) => {
+    ...
+    return (
+    <div>
+      <div className="image-list">Image List</div>
+      {images}
+    </div>);
+  };
+  ```
+  ```css
+  // src/components/ImageList.css
+  .image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  ...
+  ```
+* The challenge now is to organize pictures with proper size. Your plan is to crunch some large photos so it behaves like flickr.
+  ```
+  .image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 10px;
+    grid-auto-rows: 150px;
+  }
+
+  .image-list img {
+    width: 250px;
+    grid-row-end: span 3;
+  }
+  ```
+  * `display: grid` divides the screen into grids(cells).
+  * `grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));` places child `<div>s` into a repeated manner where each column's min-width is 250px and max-width is 1ft. height is adjusted proportionally to the width.
+  * `grid-auto-rows: 150px;` defines the height of each row
+  * `grid-row-end` defines how many rows each item can span to when it exceeds the size of each container.
