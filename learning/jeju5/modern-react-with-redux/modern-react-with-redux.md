@@ -1069,3 +1069,35 @@ https://www.udemy.com/course/react-redux/
 
   export default ImageCard;
   ```
+* Let's define `grid-row-end` dynamically with React
+  * How do I get access to DOM elements from React?
+    * You can do `document.querySelector(...)`
+    * but better approach is using React Ref
+      ```js
+      import React from 'react';
+
+      class ImageCard extends React.Component {
+
+        constructor(props) {
+          super(props);
+          this.imageRef = React.createRef();
+        }
+
+        render() {
+          const { description, urls} = this.props.image;
+
+          return (
+            <div>
+              <img
+                ref={this.ImageCard}
+                alt={description}
+                src={urls.regular}
+              />
+            </div>
+          );
+        }
+      }
+
+      export default ImageCard;
+      ```
+      
