@@ -1,27 +1,20 @@
-import React from 'react';
-import { useTabs } from './hook';
-
-const content = [
-  {
-    tab: 'Section 1',
-    content: 'This is the content of the Section 1',
-  },
-  {
-    tab: 'Section 2',
-    content: 'This is the content of the Section 2',
-  },
-];
+import React, { useEffect, useState } from 'react';
 
 const App = () => {
-  const { curItem, changeItem } = useTabs(0, content);
+  const sayHello = () => console.log('hello');
+  const [num, setNum] = useState(0);
+  const [num2, setNum2] = useState(0);
+  // 1. init + every(num, num2) changed
+  // useEffect(sayHello);
+  // 2. only init
+  // useEffect(sayHello, []);
+  // 3. init + every num changed
+  useEffect(sayHello, [num]);
 
   return (
     <div className="App">
-      <h1>UseTabs</h1>
-      {content.map((section, idx) => (
-        <button onClick={() => changeItem(idx)}>{section.tab}</button>
-      ))}
-      <div>{curItem.content}</div>
+      <button onClick={() => setNum(num + 1)}>{num}</button>
+      <button onClick={() => setNum2(num2 + 1)}>{num2}</button>
     </div>
   );
 };

@@ -101,8 +101,9 @@ $ npm start
 ```
 
 - packages
+  - [x] useInput
+  - [x] useTabs
   - [ ] useTitle
-  - [ ] useInput
   - [ ] usePageLeave
   - [ ] useClick
   - [ ] useFadeIn
@@ -111,7 +112,6 @@ $ npm start
   - [ ] useNetwork
   - [ ] useNotification
   - [ ] useScroll
-  - [ ] useTabs
   - [ ] usePreventLeave
   - [ ] useConfirm
   - [ ] useAxios
