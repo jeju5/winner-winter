@@ -1192,3 +1192,21 @@ https://www.udemy.com/course/react-redux/
    );
   }
   ```
+* What if you don't want to return a container element?
+  * Let's take code below as an example. For some reason (css possibly) you might not want to return rendered Items inside of <div>
+    ```js
+    return(
+      <div className="accordion ui styled">
+        {renderedItems}
+      </div>
+    );
+    ```
+  * You can use React.Fragment
+    ```js
+    return(
+      <React.Fragment className="accordion ui styled">
+        {renderedItems}
+      </React.Fragment>
+    );
+    ```
+ 
