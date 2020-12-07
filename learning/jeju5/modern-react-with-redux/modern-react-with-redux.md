@@ -966,4 +966,37 @@ https://www.udemy.com/course/react-redux/
   ```
 
 # Section 9: Building Lists of Records
-* 
+* `key` in react.
+  * Consider a list of 30 divs and showing 3divs in UI. now you have to include 1div to UI, showing 4divs. React has to have a identifier for each div to properly and efficiently manage divs. `key` acts as an identifier for each DOM element (<div> in this case)
+  ```js
+  import React from 'react';
+
+  const ImageList = (props) => {
+
+    const images = props.images.map( (i) => {
+      return <img key={i.id} src={i.urls.regular} alt={`alt ${i.id}`}/>
+    });
+
+    return (
+    <div>
+      <div>Image List</div>
+      {images}
+    </div>);
+  };
+
+  export default ImageList;
+  ```
+* destructure in js: you can destructure any js object with property names. (note how `i` is destructured)
+  ```js
+  const images = props.images.map( (i) => {
+    return <img key={i.id} src={i.urls.regular} alt={`alt ${i.desciption}`}/>
+  });
+  ```
+  ```js
+  const images = props.images.map( ({id, urls, desciption}) => {
+    return <img key={id} src={urls.regular} alt={`alt ${desciption}`}/>
+  });
+  ```
+  
+  
+   
