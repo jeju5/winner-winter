@@ -1042,3 +1042,30 @@ https://www.udemy.com/course/react-redux/
   * `grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));` places child `<div>s` into a repeated manner where each column's min-width is 250px and max-width is 1ft. height is adjusted proportionally to the width.
   * `grid-auto-rows: 150px;` defines the height of each row
   * `grid-row-end` defines how many rows each item can span to when it exceeds the size of each container.
+
+* Props System works similar way to Class Component as it was to Functional Component. You don't have to do explicitly pass it on to function paramater as you did in Functional Component.
+  ```js
+  const images = props.images.map( ({id, urls, desciption}) => {
+    return <ImageCard key={id} src={urls.regular} alt={desciption}/>
+  });
+  ```
+  ```js
+  import React from 'react';
+
+  class ImageCard extends React.Component {
+
+    render() {
+      return (
+        <div>
+          <img
+            key={this.props.image.id}
+            alt={this.props.image.description}
+            src={this.props.image.urls.regular}
+          />
+        </div>
+      )
+    }
+  }
+
+  export default ImageCard;
+  ```
