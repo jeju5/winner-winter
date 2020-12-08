@@ -1209,4 +1209,23 @@ https://www.udemy.com/course/react-redux/
       </React.Fragment>
     );
     ```
+* Challenge: How would you save a 'index of clicked element' in the state of a functional component?
+  * useState!
+  ```js
+  import { useState } from 'react'; // import a state system to functional component
+  ...
+  const Accordion = ({ items }) => {
+    const [activeIndex, setActiveIndex] = useState(null); // define [stateName, stateSetter]
+  
+    const onTitleClick = (index) => {
+      setActiveIndex(index); // assing a value to state with stateSetter
+    };
+    ...
+    return(
+      <div className="accordion ui styled">
+        <h1>{activeIndex}</h1> // get a state value.
+      </div>
+    );
+  }
+  ```
  
