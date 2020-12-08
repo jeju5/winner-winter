@@ -1181,6 +1181,22 @@ https://www.udemy.com/course/react-redux/
 
 # Section 12: Understanding Hooks in React
 * There are two types of hooks: Primitive Hooks & Custom Hooks (naming is not official but it helps understand the concept)
+  * Primitive Hook
+    Basic Hooks
+     - useState
+     - useEffect
+     - useContext
+     - Additional Hooks
+    Additional Hooks
+     - useReducer
+     - useCallback
+     - useMemo
+     - useRef
+     - useImperativeHandle
+     - useLayoutEffect
+     - useDebugValue
+  * Primitive Hook
+    - Custom named hooks
 * You can take props by destructuring
   ```js
   <Accordion items={items} titles={titles}/>
