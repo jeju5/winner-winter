@@ -1319,3 +1319,37 @@ https://www.udemy.com/course/react-redux/
       console.log("else"); // else is logged
   }
   ```
+* challenge: how would you handle html elements in the string?
+  ```
+  example
+  "<span class="searchmatch">Money</span> is any item or verifiable record that is generally accepted as payment for goods and services and repayment of debts, such as taxes, in a particular"
+  ```
+* React has `dangerouslysetinnerhtml`
+  * when `r.snippet` in `<div>{r.snippet}</div>` has html elements such as `<span>`
+  * use case: `<div dangerouslySetInnerHTML={{ __html: r.snippet}} />`
+ 
+* useEffect cleanup
+  * useEffect function can return a 'clean up function' this gets executed at the next render() event.
+  ```js
+    useEffect(() => {
+     // use effect
+     return (()=> { // clean up });
+    },
+    [term]
+  );
+  ```
+* search with timeout using useEffectCleanup
+  ```js
+      const timeOutId = setTimeout(() => {
+      if (term) {
+        getWikipedia();
+      }
+    }, 500);
+
+    const expireTimeOut = () => {
+      clearTimeout(timeOutId);
+    }
+
+    return expireTimeOut;
+  ```
+  
