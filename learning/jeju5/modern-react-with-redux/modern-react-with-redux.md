@@ -1244,7 +1244,8 @@ https://www.udemy.com/course/react-redux/
     );
   }
   ```
-* UseState Syntax
+* `useState` allows functional component to use 'state'
+  * syntax
   ```js
   // a: state name
   // b: state setter name
@@ -1254,4 +1255,18 @@ https://www.udemy.com/course/react-redux/
   // similar to this
   const a = c;            (a is state)
   const b = setterOfA(); 
+  ```
+* `useEffect` allows functional component to use 'life cycle'
+  * syntax
+  ```js
+  /*
+  - a is function that is triggered after rendered.
+  - b is a option array type argument that triggers a contionally.
+  */
+  useEffect(a, b);
+  
+  useEffect(a);        // execute 'a' after the first render. and no more.
+  useEffect(a, []);    // execute 'a' after the first render. and all afterward.
+  useEffect(a, [b]);   // execute 'a' after the first render. and when 'b' is changed.
+  useEffect(a, [b,c]); // ?
   ```
