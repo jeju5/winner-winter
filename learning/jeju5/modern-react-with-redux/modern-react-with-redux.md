@@ -1268,5 +1268,6 @@ https://www.udemy.com/course/react-redux/
   useEffect(a);        // execute 'a' after the first render. and no more.
   useEffect(a, []);    // execute 'a' after the first render. and all afterward.
   useEffect(a, [b]);   // execute 'a' after the first render. and when 'b' is changed.
-  useEffect(a, [b,c]); // ?
+  useEffect(a, [b,c]); // execute 'a' after the first render. and when 'b' or 'c' is changed.
+  useEffect(a, [b,c,d]); // execute 'a' after the first render. and when 'b', 'c' or 'd' is changed.
   ```
