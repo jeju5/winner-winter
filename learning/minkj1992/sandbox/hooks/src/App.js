@@ -1,22 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const useTitle = (initTitle) => {
-  const [title, setTitle] = useState(initTitle);
-  const updateTitle = () => {
-    const htmlTitle = document.querySelector('title');
-    htmlTitle.innerText = title;
-  };
+const useClick = (onClick) => {
+  const ref = useRef();
 
-  useEffect(updateTitle, [title]);
-  return setTitle;
+  useEffect(() => {
+    // 변수를 안에서 참조하지 않으면 warning (ref가 unmount 시점에 null이 된다.)
+    const element = ref.current;
+    if (element) {
+      // 'click' is keyword
+      element.addEventListener('click', onClick);
+    }
+    // ComponentWillUnmount()
+    return () => {
+      if (element) {
+        element.removeEventListener('click', onClick);
+      }
+    };
+  }, [onClick]);
+
+  return ref.current;
 };
 
 const App = () => {
-  const titleUpdater = useTitle('Loading...');
-  setTimeout(() => titleUpdater("Leoo's Updater"), 3000);
+  const sayHello = () => console.log('Hi minwook');
+  const title = useClick(sayHello);
   return (
     <div className="App">
-      <h1>Hi Leoo 😄</h1>
+      <h1 ref={title}>useClick😄</h1>
     </div>
   );
 };

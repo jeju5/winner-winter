@@ -121,9 +121,56 @@ const { curItem, changeItem } = useTabs(0, content);
   - 1. `useEffect(sayHello);`
     - deps 가 존재하지 않는다면, run the effect every time.
   - 2. `useEffect(sayHello, []);`
-    - deps에 empty list이면, 초기화 때만 동작
+    - deps에 empty list이면, 초기화 때만 동작 (componentDidMount때 단 1번만 동작)
+    - **eventListener를 추가하는 예시를 보면, 일반적으로 event는 초기화 시점에 해주고 이후에는 안해주는 것이 일반적**
   - 3. `useEffect(sayHello, [num1, num2]);`
     - `num1`, `num2`가 변경될 때만 동작
 - `componentWillUnmount`
 
 ## useRef
+> document.getElementByID()와 유사
+
+- react에 있는 모든 componentsms ref element를 가지고 있다. (`reference prop`)
+
+## Hooks
+
+- useClick
+```js
+import React, { useEffect, useRef } from 'react';
+
+const useClick = (onClick) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    // 1. 변수를 안에서 참조하지 않으면 warning (ref가 unmount 시점에 null이 된다.)
+    const element = ref.current;
+    if (element) {
+      // 'click' is keyword
+      element.addEventListener('click', onClick);
+    }
+    // ComponentWillUnmount()
+    return () => {
+      if (element) {
+        element.removeEventListener('click', onClick);
+      }
+    };
+  }, [onClick]);
+
+  return ref.current;
+};
+
+const App = () => {
+  const sayHello = () => console.log('Hi minwook');
+  const title = useClick(sayHello);
+  return (
+    <div className="App">
+      <h1 ref={title}>useClick😄</h1>
+    </div>
+  );
+};
+
+export default App;
+```
+
+> 1. 에 대한 로그 
+>> The ref value 'element.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'element.current' to a variable inside the effect, and use that variable in the cleanup function
