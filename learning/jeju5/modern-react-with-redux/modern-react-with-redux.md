@@ -1340,16 +1340,16 @@ https://www.udemy.com/course/react-redux/
   ```
 * search with timeout using useEffectCleanup
   ```js
-      const timeOutId = setTimeout(() => {
-      if (term) {
-        getWikipedia();
-      }
-    }, 500);
-
-    const expireTimeOut = () => {
-      clearTimeout(timeOutId);
+  const timeOutId = setTimeout(() => {
+    if (term) {
+      getWikipedia();
     }
+  }, 500);
 
-    return expireTimeOut;
+  const expireTimeOut = () => {
+    clearTimeout(timeOutId);
+  }
+
+  return expireTimeOut;
   ```
   
