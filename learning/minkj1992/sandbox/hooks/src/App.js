@@ -1,32 +1,33 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
-const useClick = (onClick) => {
-  const ref = useRef();
+const useConfirm = (msg = '', onConfirm, onCancel) => {
+  if (!onConfirm && typeof onConfirm !== 'function') {
+    return;
+  }
 
-  useEffect(() => {
-    // 변수를 안에서 참조하지 않으면 warning (ref가 unmount 시점에 null이 된다.)
-    const element = ref.current;
-    if (element) {
-      // 'click' is keyword
-      element.addEventListener('click', onClick);
+  // not mandatory
+  if (onCancel && typeof onCancel !== 'function') {
+    return;
+  }
+
+  const confirmAction = () => {
+    if (window.confirm(msg)) {
+      onConfirm();
+    } else {
+      onCancel();
     }
-    // ComponentWillUnmount()
-    return () => {
-      if (element) {
-        element.removeEventListener('click', onClick);
-      }
-    };
-  }, [onClick]);
-
-  return ref.current;
+  };
+  return confirmAction;
 };
 
 const App = () => {
-  const sayHello = () => console.log('Hi minwook');
-  const title = useClick(sayHello);
+  const deleteWorld = () => console.log('Deleteing the World...');
+  const abort = () => console.log('Aborted');
+  const confirmDelete = useConfirm('Are u sure?', deleteWorld, abort);
   return (
     <div className="App">
-      <h1 ref={title}>useClick😄</h1>
+      <h1>useConfirm😄</h1>
+      <button onClick={confirmDelete}>Delete the world</button>
     </div>
   );
 };

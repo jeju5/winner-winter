@@ -134,7 +134,8 @@ const { curItem, changeItem } = useTabs(0, content);
 
 ## Hooks
 
-- useClick
+- useClick()
+
 ```js
 import React, { useEffect, useRef } from 'react';
 
@@ -142,7 +143,7 @@ const useClick = (onClick) => {
   const ref = useRef();
 
   useEffect(() => {
-    // 1. 변수를 안에서 참조하지 않으면 warning (ref가 unmount 시점에 null이 된다.)
+    // 1. 변수를 안에서 copy하지 않으면 warning (ref가 unmount 시점에 null이 된다.)
     const element = ref.current;
     if (element) {
       // 'click' is keyword
@@ -174,3 +175,43 @@ export default App;
 
 > 1. 에 대한 로그 
 >> The ref value 'element.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'element.current' to a variable inside the effect, and use that variable in the cleanup function
+
+- useConfirm()
+
+```js
+import React from 'react';
+
+const useConfirm = (msg = '', onConfirm, onCancel) => {
+  if (!onConfirm && typeof onConfirm !== 'function') {
+    return;
+  }
+
+  // not mandatory
+  if (onCancel && typeof onCancel !== 'function') {
+    return;
+  }
+
+  const confirmAction = () => {
+    if (window.confirm(msg)) {
+      onConfirm();
+    } else {
+      onCancel();
+    }
+  };
+  return confirmAction;
+};
+
+const App = () => {
+  const deleteWorld = () => console.log('Deleteing the World...');
+  const abort = () => console.log('Aborted');
+  const confirmDelete = useConfirm('Are u sure?', deleteWorld, abort);
+  return (
+    <div className="App">
+      <h1>useConfirm😄</h1>
+      <button onClick={confirmDelete}>Delete the world</button>
+    </div>
+  );
+};
+
+export default App;
+```
