@@ -1228,4 +1228,14 @@ https://www.udemy.com/course/react-redux/
     );
   }
   ```
- 
+* UseState Syntax
+  ```js
+  // a: state name
+  // b: state setter name
+  // c: inital value of a;
+  const [a, b] = useState(c);
+  
+  // similar to this
+  const a = c;            (a is state)
+  const b = setterOfA(); 
+  ```
