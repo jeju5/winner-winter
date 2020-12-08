@@ -1271,3 +1271,19 @@ https://www.udemy.com/course/react-redux/
   useEffect(a, [b,c]); // execute 'a' after the first render. and when 'b' or 'c' is changed.
   useEffect(a, [b,c,d]); // execute 'a' after the first render. and when 'b', 'c' or 'd' is changed.
   ```
+  * limitation to useEffect: you can't directly pass a async method.
+    ```js
+    useEffect(() => {
+      const search = async () => {
+        await axios.get('URL');
+      }
+      search();
+    }, [term]);
+    ```
+    ```js
+    useEffect(() => {
+      (async () => {
+        await axios.get('URL');
+      })();
+    }, [term]);
+    ```
