@@ -1287,3 +1287,35 @@ https://www.udemy.com/course/react-redux/
       })();
     }, [term]);
     ```
+* you can't directly put async function as the first arg of useEffect hook
+  ```js
+  useEffect(async () => {
+    await axios.get(...)
+  }, [term]);
+  ```
+* make async call inside the function you put in as the first arg of useEffect hook
+  ```js
+  useEffect(async () => {
+    await axios.get(...)
+  }, [term]);
+  ```
+  ```js
+    useEffect(() => {
+    const getWikipedia = async () => {
+      await axios.get('getWikipediaURL');
+    };
+
+    getWikipedia();
+    ...
+  }, [term]);
+  ```
+  
+* js if/else block tip
+  * `0, "", null` are all considered as `false`
+  ```js
+  if ("") {
+      console.log("if");
+  } else {
+      console.log("else"); // else is logged
+  }
+  ```
