@@ -1569,3 +1569,82 @@ https://www.udemy.com/course/react-redux/
   * approach is simple you use two Effect hooks.
     * #1 useEffect: when language or text changes -> set a 3sec timer that updates `finalizedText`
     * #2 useEffect: when `finalized text` changes -> make api call
+  * example
+    ```js
+    import React, {useState, useEffect} from 'react';
+    import axios from 'axios';
+
+    const googleTranslateApiKey = "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM";
+
+    const Convert = ({ language, text }) => {
+      const [translated, setTranslated] = useState('')
+      const [finalizedText, setFinalizedText] = useState(text);
+
+      // 'text is being entered' => set/cancel a timer to update 'finalized text'
+      useEffect(
+        () => {
+          // set a timer to update 'finalized text'
+          const timerId = setTimeout(
+            () => {
+              setFinalizedText(text);
+            },
+            2000
+          );
+
+          // cancel a timer you created above because 'text' is newly updated
+          return (
+            () => {
+              clearTimeout(timerId);
+            }
+          )
+        },
+        [text]
+      );
+
+      // 'text is finalized or language is selected' => make api call and update translated.
+      useEffect(
+        () => {
+          const translate = async () => {
+            const { data } = await axios.post(
+              'https://translation.googleapis.com/language/translate/v2',
+              {},
+              {
+                params: {
+                  q: finalizedText,
+                  target: language.value,
+                  key: googleTranslateApiKey
+                }
+              }
+            );
+            // console.log(data.data.translations);
+            setTranslated(data.data.translations[0].translatedText);
+          }
+          translate();
+        },
+        [language, finalizedText]
+      );
+
+      return (
+        <div>
+          <h1 className="ui header">{translated}</h1>
+        </div>
+      );
+    }
+
+    export default Convert;
+    ```
+  * Findings
+    ```js
+    const Convert = ({ language, text }) => {
+     const [translated, setTranslated] = useState('')
+     const [finalizedText, setFinalizedText] = useState(text);
+     ...
+    ```
+    * functional component execution != render
+    * functional component is executed everytime props are changed, but this doesn't mean it is rendered everytime
+    * hooks are called every render. at the initial render `finalizedText` will be same as what `text` is. However when you enter some keys into input to change `text`, it doesn't update finalizedText while text is being updated.
+    * because prop change itself dosn't triggers a render.
+    ```
+    1) prop change triggers functional component
+    2) prop change itself doesn't trigger render
+    ```
