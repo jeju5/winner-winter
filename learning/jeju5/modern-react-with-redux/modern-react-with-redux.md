@@ -1379,5 +1379,27 @@ https://www.udemy.com/course/react-redux/
    ...
   }
   ```
+* ternary expression on className injection (based on boolean variable open)
+  ```js
+  <div className={`ui selection dropdown ${open ? 'visible active' : ''}`} onClick={() => {setOpen(!open)}}>
+  ```
+  
+* how would you close an option when other DOM element outside of options is clicked?
+  * click event will bubble up toward `<body>`
+  * set a click event listener on `<body>` that takes care of open/close logic
+  * good news is you can add a listener to parent 'DOM element' in child component.
+  ```js
+  const Dropdown = ({options, selected, onSelect}) => {
+  // state hook
+  const [open, setOpen] = useState(false);
+
+  // effect(render) with hook
+  useEffect(() => {
+    document.body.addEventListener('click', () => {
+      setOpen(false);
+    })
+  }, []);
+  ```
+* Now you added a listener, but this doesn't solve our problem because even when you click `<div>` the event bubbles up to `<body>`, triggering setOpen(false).
   
   
