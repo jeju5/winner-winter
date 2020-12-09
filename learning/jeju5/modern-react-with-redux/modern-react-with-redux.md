@@ -1565,3 +1565,5 @@ https://www.udemy.com/course/react-redux/
       return result
     }
     ```
+* You are making too many api requests. Can you do debouncing?
+  
