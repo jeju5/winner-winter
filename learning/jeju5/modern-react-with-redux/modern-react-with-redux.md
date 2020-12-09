@@ -1512,3 +1512,56 @@ https://www.udemy.com/course/react-redux/
     );
   }, []);
   ```
+* js class method, function syntax (wrt asyc)
+  * method vs function
+    ```
+    method is associated with an object while function is not
+    ```
+  * class method. class method is not a function so don't use `function` keyword
+    ```js
+    class Car {
+      constructor(brand, model) {
+       this.brand = brand;
+       this.model = model;
+      }
+
+      drive() {
+        return 'Broom Broom';
+      }
+    }
+    ```
+  * class method with arrow syntax. (why would you do this though?)
+    ```js
+    class Car {
+      constructor(brand, model) {
+       this.brand = brand;
+       this.model = model;
+       this.drive = () => {
+         return 'Broom Broom';
+       }
+    }
+    ```
+  * with `function` keyword
+    ```js
+    function drive() {
+      return 'Broom Broom';
+    }
+    ```
+    ```js
+    async function drive() {
+      const result = await driveAPI();
+      return result
+    }
+    ```
+  * arrow function
+    ```js
+    drive = () => {
+      return 'Broom Broom';
+    }
+    ```
+    ```js
+    drive = async () => {
+      const result = await driveAPI();
+      return result
+    }
+    ```
