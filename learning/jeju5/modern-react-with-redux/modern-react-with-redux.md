@@ -1401,5 +1401,56 @@ https://www.udemy.com/course/react-redux/
   }, []);
   ```
 * Now you added a listener, but this doesn't solve our problem because even when you click `<div>` the event bubbles up to `<body>`, triggering setOpen(false).
-  
-  
+  * remember you used `this.imageRef = React.createRef();` to access DOM element from class component? you can do a similar job by using `useRef` hook.
+  ```js
+  import React, { useState, useEffect, useRef } from 'react';
+
+  const Dropdown = ({options, selected, onSelect}) => {
+    // state hook
+    const [open, setOpen] = useState(false);
+    
+    // ref hook 
+    const dropDownRef = useRef();
+
+    // effect hook
+    useEffect(() => {
+      document.body.addEventListener('click', (e) => {
+        if (dropDownRef.current && dropDownRef.current.contains(e.target)) {
+          // do nothing (when drop down is clicked)
+        } else {
+          setOpen(false);
+        }
+      })
+    }, []);
+
+    const renderedOptions = options.map(
+      (option) => {
+        if (option.value === selected.value) {
+          // display selected item on the very top label, but not in options
+          return null;
+        }
+
+        return (
+          <div key={option.value} className="item" onClick={() => onSelect(option)}>
+            {option.label}
+          </div>
+        );
+      }
+    );
+
+    return (
+      <div className="ui form" ref={dropDownRef}>
+        <div className="field">
+          <label className="label">Select a Color</label>
+          <div className={`ui selection dropdown ${open ? 'visible active' : ''}`} onClick={() => {setOpen(!open)}}>
+            <i className="dropdown icon"></i>
+            <div className="text">{selected.label}</div>
+            <div className={`menu ${open ? 'visible transition' : ''}`}>{renderedOptions}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  export default Dropdown;
+  ```
