@@ -1454,3 +1454,62 @@ https://www.udemy.com/course/react-redux/
 
   export default Dropdown;
   ```
+* Now you want to implemewnt show/hide toggle button of 'Dropdown' in App.js
+  * you can do it with ternary expression on `showDropDown` state hook.
+  ```js
+  const App = () => {
+   ...
+
+   return (
+     <div>
+       <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
+       {/* <Accordion items={items}/> */}
+       {/* <Search /> */}
+
+       { showDropdown ? 
+         <Dropdown
+           options={options}
+           selected={selected}
+           onSelect={setSelected}
+         /> : null
+       }
+     </div>
+   );
+ }
+ ```
+ * However this leaves a problem on effect hook with event listener we created.
+ * Dropdown is set to `null` upon `showDropdown=false`. `dropDownRef` also becomes `null`. and `dropDownRef.current.contains(e.target)` throws a null pointer exception when you click some DOM elements. Because you added precondition `dropDownRef.current &&`. The exception isn't thrown but it is always nice to clear up unused event listener(s).
+ ```js
+    // effect hook
+    useEffect(() => {
+      document.body.addEventListener('click', (e) => {
+        if (dropDownRef.current && dropDownRef.current.contains(e.target)) {
+          // do nothing (when drop down is clicked)
+        } else {
+          setOpen(false);
+        }
+      })
+    }, []);
+  ```
+  ```js
+    // effect(render) with hook
+  useEffect(() => {
+    // define listener
+    const onBodyClickListener = (e) => {
+      if (dropDownRef.current && dropDownRef.current.contains(e.target)) {
+        // do nothing (when drop down is clicked)
+      } else {
+        setOpen(false);
+      }
+    }
+    // attach
+    document.body.addEventListener('click', onBodyClickListener);
+
+    return (
+      () => {
+        // detach with clean up
+        document.body.removeEventListener('click', onBodyClickListener);
+      }
+    );
+  }, []);
+  ```
