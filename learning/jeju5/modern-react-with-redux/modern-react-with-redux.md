@@ -1459,12 +1459,11 @@ https://www.udemy.com/course/react-redux/
   ```js
   const App = () => {
    ...
-
    return (
      <div>
        <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-       {/* <Accordion items={items}/> */}
-       {/* <Search /> */}
+       // <Accordion items={items}/> */}
+       // <Search /> */}
 
        { showDropdown ? 
          <Dropdown
@@ -1474,6 +1473,5 @@ https://www.udemy.com/course/react-redux/
          /> : null
        }
      </div>
-   );
- }
+ );
  ```
