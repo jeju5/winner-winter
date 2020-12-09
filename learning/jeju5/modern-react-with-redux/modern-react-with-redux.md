@@ -1566,4 +1566,6 @@ https://www.udemy.com/course/react-redux/
     }
     ```
 * You are making too many api requests. Can you do debouncing?
-  
+  * approach is simple you use two Effect hooks.
+    * #1 useEffect: when language or text changes -> set a 3sec timer that updates `finalizedText`
+    * #2 useEffect: when `finalized text` changes -> make api call
