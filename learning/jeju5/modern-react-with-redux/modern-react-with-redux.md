@@ -1354,3 +1354,30 @@ https://www.udemy.com/course/react-redux/
   ```
 * js debouncing
   * watch #169 clip.
+
+* As you pass props/state to child component, you can pass hooked state to child component
+  ```js
+  const App = () => {
+    // state with hook
+    const [selected, setSelected] = useState(options[0]);
+
+    return (
+      <div>
+        {/* <Accordion items={items}/> */}
+        {/* <Search /> */}
+        <Dropdown
+          options={options}
+          selected={selected}
+          onSelect={setSelected}
+          />
+      </div>
+    );
+  }
+  ```
+  ```js
+  const Dropdown = ({options, selected, onSelect}) => {
+   ...
+  }
+  ```
+  
+  
