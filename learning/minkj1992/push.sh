@@ -1,5 +1,5 @@
 #!/bin/sh
-CURRENT_CATEGORY='[React-Hooks]'
+CURRENT_CATEGORY='[GraphQL-Client]'
 
 # If a command fails then the deploy stops
 set -e
@@ -12,6 +12,8 @@ cd ../..
 echo "Change dir to root-repo dir"
 printf "\033[0;32mCurrent Dir: $(pwd) \033[0m\n"
 
+# fetch Upstream 
+git pull upstream main
 
 # Add changes to git.
 
@@ -24,9 +26,9 @@ if [ -n "$*" ]; then
 fi
 git commit -m "$CURRENT_CATEGORY $msg"
 
-# push to forked my repo
-git push origin main
 
+# push to forked my repo
+git push -f origin main
 # push to origin repo
-git fetch upstream
 git push upstream main
+
