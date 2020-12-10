@@ -28,6 +28,6 @@ git commit -m "$CURRENT_CATEGORY $msg"
 
 
 # push to forked my repo
-git push -f origin main
+git push origin main
 # push to origin repo
 git push upstream main
