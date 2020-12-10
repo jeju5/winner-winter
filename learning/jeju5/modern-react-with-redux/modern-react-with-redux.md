@@ -1181,6 +1181,22 @@ https://www.udemy.com/course/react-redux/
 
 # Section 12: Understanding Hooks in React
 * There are two types of hooks: Primitive Hooks & Custom Hooks (naming is not official but it helps understand the concept)
+  * Primitive Hook
+    Basic Hooks
+     - useState
+     - useEffect
+     - useContext
+     - Additional Hooks
+    Additional Hooks
+     - useReducer
+     - useCallback
+     - useMemo
+     - useRef
+     - useImperativeHandle
+     - useLayoutEffect
+     - useDebugValue
+  * Primitive Hook
+    - Custom named hooks
 * You can take props by destructuring
   ```js
   <Accordion items={items} titles={titles}/>
@@ -1209,4 +1225,562 @@ https://www.udemy.com/course/react-redux/
       </React.Fragment>
     );
     ```
+* Challenge: How would you save a 'index of clicked element' in the state of a functional component?
+  * useState!
+  ```js
+  import { useState } from 'react'; // import a state system to functional component
+  ...
+  const Accordion = ({ items }) => {
+    const [activeIndex, setActiveIndex] = useState(null); // define [stateName, stateSetter]
+  
+    const onTitleClick = (index) => {
+      setActiveIndex(index); // assing a value to state with stateSetter
+    };
+    ...
+    return(
+      <div className="accordion ui styled">
+        <h1>{activeIndex}</h1> // get a state value.
+      </div>
+    );
+  }
+  ```
+* `useState` allows functional component to use 'state'
+  * syntax
+  ```js
+  // a: state name
+  // b: state setter name
+  // c: inital value of a;
+  const [a, b] = useState(c);
+  
+  // similar to this
+  const a = c;            (a is state)
+  const b = setterOfA(); 
+  ```
+* `useEffect` allows functional component to use 'life cycle'
+  * syntax
+  ```js
+  /*
+  - a is function that is triggered after rendered.
+  - b is a option array type argument that triggers a contionally.
+  */
+  useEffect(a, b);
+  
+  useEffect(a);        // execute 'a' after the first render. and no more.
+  useEffect(a, []);    // execute 'a' after the first render. and all afterward.
+  useEffect(a, [b]);   // execute 'a' after the first render. and when 'b' is changed.
+  useEffect(a, [b,c]); // execute 'a' after the first render. and when 'b' or 'c' is changed.
+  useEffect(a, [b,c,d]); // execute 'a' after the first render. and when 'b', 'c' or 'd' is changed.
+  ```
+  * limitation to useEffect: you can't directly pass a async method.
+    ```js
+    useEffect(() => {
+      const search = async () => {
+        await axios.get('URL');
+      }
+      search();
+    }, [term]);
+    ```
+    ```js
+    useEffect(() => {
+      (async () => {
+        await axios.get('URL');
+      })();
+    }, [term]);
+    ```
+* you can't directly put async function as the first arg of useEffect hook
+  ```js
+  useEffect(async () => {
+    await axios.get(...)
+  }, [term]);
+  ```
+* make async call inside the function you put in as the first arg of useEffect hook
+  ```js
+  useEffect(async () => {
+    await axios.get(...)
+  }, [term]);
+  ```
+  ```js
+    useEffect(() => {
+    const getWikipedia = async () => {
+      await axios.get('getWikipediaURL');
+    };
+
+    getWikipedia();
+    ...
+  }, [term]);
+  ```
+  
+* js if/else block tip
+  * `0, "", null` are all considered as `false`
+  ```js
+  if ("") {
+      console.log("if");
+  } else {
+      console.log("else"); // else is logged
+  }
+  ```
+* challenge: how would you handle html elements in the string?
+  ```
+  example
+  "<span class="searchmatch">Money</span> is any item or verifiable record that is generally accepted as payment for goods and services and repayment of debts, such as taxes, in a particular"
+  ```
+* React has `dangerouslysetinnerhtml`
+  * when `r.snippet` in `<div>{r.snippet}</div>` has html elements such as `<span>`
+  * use case: `<div dangerouslySetInnerHTML={{ __html: r.snippet}} />`
  
+* useEffect cleanup
+  * useEffect function can return a 'clean up function' this gets executed at when functional component is unmounted (`componentWillUnmount`)
+  ```js
+    useEffect(() => {
+     // use effect
+     return (()=> { // clean up });
+    },
+    [term]
+  );
+  ```
+* search with timeout using useEffectCleanup
+  ```js
+  const timeOutId = setTimeout(() => {
+    if (term) {
+      getWikipedia();
+    }
+  }, 500);
+
+  const expireTimeOut = () => {
+    clearTimeout(timeOutId);
+  }
+
+  return expireTimeOut;
+  ```
+* js debouncing
+  * watch #169 clip.
+
+* As you pass props/state to child component, you can pass hooked state to child component
+  ```js
+  const App = () => {
+    // state with hook
+    const [selected, setSelected] = useState(options[0]);
+
+    return (
+      <div>
+        {/* <Accordion items={items}/> */}
+        {/* <Search /> */}
+        <Dropdown
+          options={options}
+          selected={selected}
+          onSelect={setSelected}
+          />
+      </div>
+    );
+  }
+  ```
+  ```js
+  const Dropdown = ({options, selected, onSelect}) => {
+   ...
+  }
+  ```
+* ternary expression on className injection (based on boolean variable open)
+  ```js
+  <div className={`ui selection dropdown ${open ? 'visible active' : ''}`} onClick={() => {setOpen(!open)}}>
+  ```
+  
+* how would you close an option when other DOM element outside of options is clicked?
+  * click event will bubble up toward `<body>`
+  * set a click event listener on `<body>` that takes care of open/close logic
+  * good news is you can add a listener to parent 'DOM element' in child component.
+  ```js
+  const Dropdown = ({options, selected, onSelect}) => {
+  // state hook
+  const [open, setOpen] = useState(false);
+
+  // effect(render) with hook
+  useEffect(() => {
+    document.body.addEventListener('click', () => {
+      setOpen(false);
+    })
+  }, []);
+  ```
+* Now you added a listener, but this doesn't solve our problem because even when you click `<div>` the event bubbles up to `<body>`, triggering setOpen(false).
+  * remember you used `this.imageRef = React.createRef();` to access DOM element from class component? you can do a similar job by using `useRef` hook.
+  ```js
+  import React, { useState, useEffect, useRef } from 'react';
+
+  const Dropdown = ({options, selected, onSelect}) => {
+    // state hook
+    const [open, setOpen] = useState(false);
+    
+    // ref hook 
+    const dropDownRef = useRef();
+
+    // effect hook
+    useEffect(() => {
+      document.body.addEventListener('click', (e) => {
+        if (dropDownRef.current && dropDownRef.current.contains(e.target)) {
+          // do nothing (when drop down is clicked)
+        } else {
+          setOpen(false);
+        }
+      })
+    }, []);
+
+    const renderedOptions = options.map(
+      (option) => {
+        if (option.value === selected.value) {
+          // display selected item on the very top label, but not in options
+          return null;
+        }
+
+        return (
+          <div key={option.value} className="item" onClick={() => onSelect(option)}>
+            {option.label}
+          </div>
+        );
+      }
+    );
+
+    return (
+      <div className="ui form" ref={dropDownRef}>
+        <div className="field">
+          <label className="label">Select a Color</label>
+          <div className={`ui selection dropdown ${open ? 'visible active' : ''}`} onClick={() => {setOpen(!open)}}>
+            <i className="dropdown icon"></i>
+            <div className="text">{selected.label}</div>
+            <div className={`menu ${open ? 'visible transition' : ''}`}>{renderedOptions}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  export default Dropdown;
+  ```
+* Now you want to implemewnt show/hide toggle button of 'Dropdown' in App.js
+  * you can do it with ternary expression on `showDropDown` state hook.
+  ```js
+   const App = () => {
+    ...
+    return (
+      <div>
+        <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
+        // <Accordion items={items}/> */}
+        // <Search /> */}
+
+        { showDropdown ? 
+          <Dropdown
+            options={options}
+            selected={selected}
+            onSelect={setSelected}
+          /> : null
+        }
+      </div>
+   );
+  }
+  ```
+ * However this leaves a problem on effect hook with event listener we created.
+ * Dropdown is set to `null` upon `showDropdown=false`. `dropDownRef` also becomes `null`. and `dropDownRef.current.contains(e.target)` throws a null pointer exception when you click some DOM elements. Because you added precondition `dropDownRef.current &&`. The exception isn't thrown but it is always nice to clear up unused event listener(s).
+ ```js
+    // effect hook
+    useEffect(() => {
+      document.body.addEventListener('click', (e) => {
+        if (dropDownRef.current && dropDownRef.current.contains(e.target)) {
+          // do nothing (when drop down is clicked)
+        } else {
+          setOpen(false);
+        }
+      })
+    }, []);
+ ```
+ ```js
+    // effect(render) with hook
+  useEffect(() => {
+    // define listener
+    const onBodyClickListener = (e) => {
+      if (dropDownRef.current && dropDownRef.current.contains(e.target)) {
+        // do nothing (when drop down is clicked)
+      } else {
+        setOpen(false);
+      }
+    }
+    // attach
+    document.body.addEventListener('click', onBodyClickListener);
+
+    return (
+      () => {
+        // detach with clean up
+        document.body.removeEventListener('click', onBodyClickListener);
+      }
+    );
+  }, []);
+  ```
+* js class method, function syntax (wrt asyc)
+  * method vs function
+    ```
+    method is associated with an object while function is not
+    ```
+  * class method. class method is not a function so don't use `function` keyword
+    ```js
+    class Car {
+      constructor(brand, model) {
+       this.brand = brand;
+       this.model = model;
+      }
+
+      drive() {
+        return 'Broom Broom';
+      }
+    }
+    ```
+  * class method with arrow syntax. (why would you do this though?)
+    ```js
+    class Car {
+      constructor(brand, model) {
+       this.brand = brand;
+       this.model = model;
+       this.drive = () => {
+         return 'Broom Broom';
+       }
+    }
+    ```
+  * with `function` keyword
+    ```js
+    function drive() {
+      return 'Broom Broom';
+    }
+    ```
+    ```js
+    async function drive() {
+      const result = await driveAPI();
+      return result
+    }
+    ```
+  * arrow function
+    ```js
+    drive = () => {
+      return 'Broom Broom';
+    }
+    ```
+    ```js
+    drive = async () => {
+      const result = await driveAPI();
+      return result
+    }
+    ```
+* You are making too many api requests. Can you do debouncing?
+  * approach is simple you use two Effect hooks.
+    * #1 useEffect: when language or text changes -> set a 3sec timer that updates `finalizedText`
+    * #2 useEffect: when `finalized text` changes -> make api call
+  * example
+    ```js
+    import React, {useState, useEffect} from 'react';
+    import axios from 'axios';
+
+    const googleTranslateApiKey = "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM";
+
+    const Convert = ({ language, text }) => {
+      const [translated, setTranslated] = useState('')
+      const [finalizedText, setFinalizedText] = useState(text);
+
+      // 'text is being entered' => set/cancel a timer to update 'finalized text'
+      useEffect(
+        () => {
+          // set a timer to update 'finalized text'
+          const timerId = setTimeout(
+            () => {
+              setFinalizedText(text);
+            },
+            2000
+          );
+
+          // cancel a timer you created above because 'text' is newly updated
+          return (
+            () => {
+              clearTimeout(timerId);
+            }
+          )
+        },
+        [text]
+      );
+
+      // 'text is finalized or language is selected' => make api call and update translated.
+      useEffect(
+        () => {
+          const translate = async () => {
+            const { data } = await axios.post(
+              'https://translation.googleapis.com/language/translate/v2',
+              {},
+              {
+                params: {
+                  q: finalizedText,
+                  target: language.value,
+                  key: googleTranslateApiKey
+                }
+              }
+            );
+            // console.log(data.data.translations);
+            setTranslated(data.data.translations[0].translatedText);
+          }
+          translate();
+        },
+        [language, finalizedText]
+      );
+
+      return (
+        <div>
+          <h1 className="ui header">{translated}</h1>
+        </div>
+      );
+    }
+
+    export default Convert;
+    ```
+  * Findings
+    ```js
+    const Convert = ({ language, text }) => {
+     const [translated, setTranslated] = useState('')
+     const [finalizedText, setFinalizedText] = useState(text);
+     ...
+    ```
+    * functional component execution != render
+    * functional component is executed everytime props are changed, but this doesn't mean it is rendered everytime
+    * hooks are called every render. at the initial render `finalizedText` will be same as what `text` is. However when you enter some keys into input to change `text`, it doesn't update finalizedText while text is being updated.
+    * because prop change itself dosn't triggers a render.
+    ```
+    1) prop change triggers functional component
+    2) prop change itself doesn't trigger render
+    ```
+# Section 13: Navigation From Scratch
+* React Router can easily implmenet navigation feature, but this will be convered in the later section.
+* `window.location` is a js object that browser holds while you navigate across pages
+* one naive approach
+  ```js
+  const showAccordion = () => {
+    if (window.location.pathname === "/") {
+      return <Accordion items={items} />
+    }
+  }
+  ...
+  return (
+   <div>
+     {showAccordion()}
+   </div>
+  );
+  ```
+* or creating Route.js approach (better)
+  * `children` in props is the element is sandwiched inside.
+  ```js
+  const Route = ( {path, children } ) => {
+    return window.location.pathname === route
+      ? component
+      : null;
+  };
+
+  export default Route;
+  ```
+  ```js
+  ...
+  return (
+    <div>
+      <Header />
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      ...
+      <Route path="/dropdown">
+        <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
+        {
+          showDropdown  ?  <Dropdown options={options}
+                                    selected={selected}
+                                    onSelect={setSelected}
+                          />
+                        : null
+        }
+        </Route>
+    </div>
+  );
+  ```
+* Implementing navigation bar in the header (use `<a>`)
+  ```js
+  import React from 'react';
+
+  const Header = () => {
+    return (
+      <div className="ui secondary pointing menu">
+        <a href="/" className="item">
+          Accordion
+        </a>
+        <a href="/list" className="item">
+          Search
+        </a>
+        ...
+      </div>
+    );
+  };
+
+  export default Header;
+  ```
+* Downside on this approach?
+  * inefficiency
+    ```
+    user clicks a link -> the whole page refreshes -> load entire `html, css, scripts...
+    ```
+  * what is ideal is
+    ```
+    user clicks a link -> detect url change 
+                       -> change url without refreshing the page
+                       -> each Route re-renders
+    ```
+*  `<Link />` approach
+   * `window.history.pushState({}, '', `/translate`)` switches what's after origin(domain).
+   * `event.preventDefault();` suppresses full browser reload
+   * `window.dispatchEvent(new PopStateEvent('popState'));` dispatches a custom event so that you can detect url change without refreshing the browser.
+   ```js
+   import React from 'react';
+
+   const Link = ({ className, href, children}) => {
+
+     const onClickLink = (event) => {
+       event.preventDefault();
+       window.history.pushState({}, '', href);
+       window.dispatchEvent(new PopStateEvent('popstate'));
+     }
+
+     return (
+       <a className={className} href={href} onClick={onClickLink}>
+         {children}
+       </a>
+     );
+   };
+
+   export default Link;
+   ```
+   ```js
+   import { useEffect, useState } from "react";
+
+   const Route = ( {path, children } ) => {
+
+     const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+     const onPathChange = () => {
+       console.log("CHANGED" + window.location.pathname);
+       setCurrentPath(window.location.pathname); // this updates a state just to trigger 'render' (state update -> render)
+     }
+
+     useEffect( () => { 
+       window.addEventListener('popstate', onPathChange);
+
+       return () => {
+         // we don't want to keep adding the event listener everytime it re-renders
+         window.removeEventListener('popstate', onPathChange);  
+       }
+     }, []) // run an effect only once;
+
+     return (
+       currentPath === path ? children
+                            : null);
+   };
+
+   export default Route;
+   ```
+# Section 14: Hooks in Practice
+* Optional Tutorial. Just watched.
+
