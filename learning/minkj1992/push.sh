@@ -31,4 +31,3 @@ git commit -m "$CURRENT_CATEGORY $msg"
 git push -f origin main
 # push to origin repo
 git push upstream main
-
