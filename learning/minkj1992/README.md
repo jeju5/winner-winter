@@ -124,6 +124,9 @@ $ yarn add styled-components react-router-dom
 # https://www.apollographql.com/docs/react/get-started/
 $ npm install @apollo/client graphql
 # apollo-boost @apollo/react-hooks graphql
+
+# allow arror function
+$ npm  i -D babel-eslint
 $ yarn start
 
 ```
