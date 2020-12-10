@@ -1329,7 +1329,7 @@ https://www.udemy.com/course/react-redux/
   * use case: `<div dangerouslySetInnerHTML={{ __html: r.snippet}} />`
  
 * useEffect cleanup
-  * useEffect function can return a 'clean up function' this gets executed at the next render() event.
+  * useEffect function can return a 'clean up function' this gets executed at when functional component is unmounted (`componentWillUnmount`)
   ```js
     useEffect(() => {
      // use effect
@@ -1718,3 +1718,66 @@ https://www.udemy.com/course/react-redux/
 
   export default Header;
   ```
+* Downside on this approach?
+  * inefficiency
+    ```
+    user clicks a link -> the whole page refreshes -> load entire `html, css, scripts...
+    ```
+  * what is ideal is
+    ```
+    user clicks a link -> detect url change 
+                       -> change url without refreshing the page
+                       -> each Route re-renders
+    ```
+*  `<Link />` approach
+   * `window.history.pushState({}, '', `/translate`)` switches what's after origin(domain).
+   * `event.preventDefault();` suppresses full browser reload
+   * `window.dispatchEvent(new PopStateEvent('popState'));` dispatches a custom event so that you can detect url change without refreshing the browser.
+   ```js
+   import React from 'react';
+
+   const Link = ({ className, href, children}) => {
+
+     const onClickLink = (event) => {
+       event.preventDefault();
+       window.history.pushState({}, '', href);
+       window.dispatchEvent(new PopStateEvent('popstate'));
+     }
+
+     return (
+       <a className={className} href={href} onClick={onClickLink}>
+         {children}
+       </a>
+     );
+   };
+
+   export default Link;
+   ```
+   ```js
+   import { useEffect, useState } from "react";
+
+   const Route = ( {path, children } ) => {
+
+     const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+     const onPathChange = () => {
+       console.log("CHANGED" + window.location.pathname);
+       setCurrentPath(window.location.pathname); // this updates a state just to trigger 'render' (state update -> render)
+     }
+
+     useEffect( () => { 
+       window.addEventListener('popstate', onPathChange);
+
+       return () => {
+         // we don't want to keep adding the event listener everytime it re-renders
+         window.removeEventListener('popstate', onPathChange);  
+       }
+     }, []) // run an effect only once;
+
+     return (
+       currentPath === path ? children
+                            : null);
+   };
+
+   export default Route;
+   ```
