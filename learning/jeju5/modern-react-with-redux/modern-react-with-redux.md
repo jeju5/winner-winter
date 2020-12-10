@@ -1783,4 +1783,68 @@ https://www.udemy.com/course/react-redux/
    ```
 # Section 14: Hooks in Practice
 * Optional Tutorial. Just watched.
+* Custom Hook example
+  * First, `useVideos` gives back videos searched with 'buildings'.
+  * `search` function returned from `useVideos` are also called `onFormSubmit`.
+  * upon executing `search`, request to youtube api is made and `videos` state in `useVideo` is updated.
+  * `<App />` is rerendered since `<App />` imported `useVideo` thus `videos` state is part of `<App />`
+  ```js
+  // App.js
+  ...
+  import useVideos from '../hooks/useVideos';
 
+  const App = () => {
+    // useVideos return 
+    const [videos, search] = useVideos('buildings');
+
+    return (
+      <div className="ui container">
+        <SearchBar onFormSubmit={search} />
+        <div className="ui grid">
+          <div className="ui row">
+            <div className="eleven wide column">
+              <VideoDetail video={selectedVideo} />
+            </div>
+            <div className="five wide column">
+              <VideoList onVideoSelect={setSelectedVideo} videos={videos} />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  export default App;
+
+  ```
+  ```js
+  // src/hooks/useVideo.js
+  
+  import { useState, useEffect } from 'react';
+  import youtube from '../apis/youtube';
+
+  const useVideos = (defaultSearchTerm) => {
+    const [videos, setVideos] = useState([]);
+
+    // search with default term only once
+    useEffect(() => {
+      search(defaultSearchTerm);
+    }, []);
+
+    const search = async (term) => {
+      const response = await youtube.get('/search', {
+        params: {
+          q: term,
+        },
+      });
+
+      setVideos(response.data.items);
+    };
+
+    // 
+    return [videos, search];
+  };
+
+  export default useVideos;
+
+  ```
