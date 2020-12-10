@@ -1648,3 +1648,73 @@ https://www.udemy.com/course/react-redux/
     1) prop change triggers functional component
     2) prop change itself doesn't trigger render
     ```
+# Section 13: Navigation From Scratch
+* React Router can easily implmenet navigation feature, but this will be convered in the later section.
+* `window.location` is a js object that browser holds while you navigate across pages
+* one naive approach
+  ```js
+  const showAccordion = () => {
+    if (window.location.pathname === "/") {
+      return <Accordion items={items} />
+    }
+  }
+  ...
+  return (
+   <div>
+     {showAccordion()}
+   </div>
+  );
+  ```
+* or creating Route.js approach (better)
+  * `children` in props is the element is sandwiched inside.
+  ```js
+  const Route = ( {path, children } ) => {
+    return window.location.pathname === route
+      ? component
+      : null;
+  };
+
+  export default Route;
+  ```
+  ```js
+  ...
+  return (
+    <div>
+      <Header />
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      ...
+      <Route path="/dropdown">
+        <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
+        {
+          showDropdown  ?  <Dropdown options={options}
+                                    selected={selected}
+                                    onSelect={setSelected}
+                          />
+                        : null
+        }
+        </Route>
+    </div>
+  );
+  ```
+* Implementing navigation bar in the header (use `<a>`)
+  ```js
+  import React from 'react';
+
+  const Header = () => {
+    return (
+      <div className="ui secondary pointing menu">
+        <a href="/" className="item">
+          Accordion
+        </a>
+        <a href="/list" className="item">
+          Search
+        </a>
+        ...
+      </div>
+    );
+  };
+
+  export default Header;
+  ```
