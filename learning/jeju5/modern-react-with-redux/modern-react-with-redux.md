@@ -1848,3 +1848,7 @@ https://www.udemy.com/course/react-redux/
   export default useVideos;
 
   ```
+# Section 15: Deploying a React App
+* Deploying React App doesn't require a VM (lightweight)
+* Deployment Option1: Vercel (https://vercel.com/)
+* Deployment Option2: Netlify (https://www.netlify.com/)
