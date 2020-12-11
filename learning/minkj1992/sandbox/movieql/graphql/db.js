@@ -20,6 +20,7 @@ export const getMovies = async (limit, rating) => {
 };
 
 export const getMovie = async (id) => {
+  console.log(id);
   const {
     data: {
       data: { movie },
@@ -29,6 +30,7 @@ export const getMovie = async (id) => {
       movie_id: id,
     },
   });
+  console.log(movie);
   return movie;
 };
 
