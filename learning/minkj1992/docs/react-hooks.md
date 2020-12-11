@@ -60,6 +60,8 @@ const onChange = (event) => {
 **즉 정리하자면 다음코드에서 value는 변경될때마다, event를 트리거 시켜주고, 트리거된 event.target.value값은 전달되어 value로 destructuring해주어 value의 값을 사용할 수 있게됩니다.**
 
 
+https://stackoverflow.com/questions/64380809/can-i-destructure-an-event-handler-object-react
+
 
 
 
