@@ -82,7 +82,7 @@ query {
 }
 ```
 
-![](../../assets/playground.png)
+![](./assets/playground.png)
 
 ## react-hooks
 
@@ -130,3 +130,9 @@ $ npm  i -D babel-eslint
 $ yarn start
 
 ```
+
+- home
+![](./assets/home.png)
+
+- deatil with suggestion
+![](./assets/detail.png)
