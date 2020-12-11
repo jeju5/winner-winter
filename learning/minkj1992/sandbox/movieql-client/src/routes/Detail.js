@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { gql, useQuery } from '@apollo/client';
 import styled from 'styled-components';
+import Movie from '../components/Movie';
 
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
@@ -57,6 +58,30 @@ const Poster = styled.div`
   background-position: center center;
 `;
 
+// const SuggestionContainer = styled.div`
+//   flex-direction: column;
+//   align-items: center;
+//   width: 100%;
+// `;
+// const Suggestions = styled.div`
+//   display: grid;
+//   grid-template-columns: repeat(4, 1fr);
+//   grid-gap: 25px;
+
+//   width: 40%;
+//   ${'' /* position: relative; */}
+//   top: 50px;
+// `;
+
+const Suggestions = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+  width: 60%;
+  position: relative;
+  top: -50px;
+`;
+
 export default () => {
   const { id } = useParams();
   const { loading, data } = useQuery(GET_MOVIE, {
@@ -64,15 +89,24 @@ export default () => {
     variables: { id: +id },
   });
   return (
-    <Container>
-      <Column>
-        <Title>{loading ? 'Loading...' : data.movie.title}</Title>
-        <Subtitle>
-          {data?.movie?.language} · {data?.movie?.rating}
-        </Subtitle>
-        <Description>{data?.movie?.description_intro}</Description>
-      </Column>
-      <Poster bg={data?.movie?.medium_cover_image}></Poster>
-    </Container>
+    <>
+      <Container>
+        <Column>
+          <Title>{loading ? 'Loading...' : data.movie.title}</Title>
+          <Subtitle>
+            🇫🇯 {data?.movie?.language}
+            ❤️ {data?.movie?.rating}
+          </Subtitle>
+          <Description>{data?.movie?.description_intro}</Description>
+        </Column>
+        <Poster bg={data?.movie?.medium_cover_image}></Poster>
+      </Container>
+
+      <Suggestions>
+        {data?.suggestions?.map((s) => (
+          <Movie key={s.id} id={s.id} bg={s.medium_cover_image} />
+        ))}
+      </Suggestions>
+    </>
   );
 };
