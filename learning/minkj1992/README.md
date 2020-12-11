@@ -131,6 +131,12 @@ $ yarn start
 
 ```
 
+- backend graphql 실행
+```bash
+# learning/minkj1992/sandbox/graphql
+$ yarn start
+```
+
 - home
 ![](./assets/home.png)
 

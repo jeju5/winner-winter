@@ -39,7 +39,31 @@ const onChange = (e) => {
 - onChange 이벤트가 발생하면, e.target.value 값을 통하여 이벤트 객체에 담겨있는 현재의 텍스트 값을 읽어올 수 있습니다.
 - 참고로 React에서는 onChange의 event를 `React.ChangeEvent<HTMLInputElement>` 타입으로 정의내리고 있습니다.
   - `const { name, value } = e.target;`
-- 즉 위의 코드는, event(e)는 target을 key값으로 가지는데, 이를 object 타입으로 생성해준 상황입니다. (오버라이딩). **생성된 함수는 target을 생성해준 value를 가리키도록 지정합니다.**
+
+
+```js
+const onChange = (event) => {
+  const {
+    target: { value },
+  } = event;
+
+...
+
+
+```
+위의 코드에서 가장 이해가 되지 않았던 부분으로, 아무리 찾아도 이해를 할 수 없었지만, 이해가 되어 정리를 하게 되었습니다. 해당 코드는 키워드로 정리되어있는 tag에서 onChange를 사용함으로써 Event()타입을 사용하게 됩니다. 
+
+해당 코드는 그런 event에서 사용되는 target을 키값으로 value를 value변수로 destructuring해주는 구조입니다.
+
+이런 방식이 가능한 이유는 target이 object reference이기 때문이며, react는 DOM이벤트를 `SyntheticEvent`로 추상화 시켜주어 변화를 감지하기 위해 polling을 돌리기 때문입니다. 
+
+**즉 정리하자면 다음코드에서 value는 변경될때마다, event를 트리거 시켜주고, 트리거된 event.target.value값은 전달되어 value로 destructuring해주어 value의 값을 사용할 수 있게됩니다.**
+
+
+
+
+
+
 
 ## react-hooks/rules-of-hooks
 
