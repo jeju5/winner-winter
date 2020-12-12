@@ -13,13 +13,13 @@ images: [https://source.unsplash.com/collection/1245/1200x628]
 - nodejs
 - react-native
 
-# `push.sh`
+## `push.sh`
 
 > forked repo 와 upstream으로 push (auto fetch)
 
 ```bash
-$ git remote add upstream https://github.com/[Original Owner].git
-$ sh push.sh "커밋 명령어"
+git remote add upstream https://github.com/[Original Owner].git
+sh push.sh "커밋 명령어"
 ```
 
 - Category 설정
@@ -28,7 +28,7 @@ $ sh push.sh "커밋 명령어"
 CURRENT_CATEGORY='[<현재 공부하는 카테고리>]'
 ```
 
-# GraphQL
+## GraphQL
 
 > ./sandbox/graphql
 
@@ -65,15 +65,15 @@ $ yarn start
 
 ```json
 query {
-	movies (limit:10){
+  movies (limit:10){
     id
-  	title
+    title
     rating
     language
     medium_cover_image
   }
 
-	movie(id:24502){
+  movie(id:24502){
     title
   }
   suggestions(id:24502){
@@ -82,7 +82,7 @@ query {
 }
 ```
 
-![](./assets/playground.png)
+![playground](./assets/playground.png)
 
 ## react-hooks
 
@@ -95,9 +95,9 @@ query {
 - 환경설정
 
 ```bash
-$ npx create-react-app hooks
-$ cd hooks
-$ npm start
+npx create-react-app hooks
+cd hooks
+npm start
 ```
 
 - packages
@@ -132,13 +132,35 @@ $ yarn start
 ```
 
 - backend graphql 실행
+
 ```bash
 # learning/minkj1992/sandbox/graphql
-$ yarn start
+yarn start
 ```
 
 - home
-![](./assets/home.png)
+
+![homm](./assets/home.png)
 
 - deatil with suggestion
-![](./assets/detail.png)
+![Detail](./assets/detail.png)
+
+## nodejs
+
+```bash
+# 1. node install from node.js public site
+# vscode extension auto close tag
+# Code Spell Checker
+# Bracket Pair Colorizer 2
+node <fileName>
+```
+
+- es6 import 문 사용하기 위한 세팅
+  - <https://www.daleseo.com/js-node-es-modules/>
+- package.json
+
+```json
+{
+  type: "module"
+}
+```

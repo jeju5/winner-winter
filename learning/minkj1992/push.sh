@@ -1,5 +1,5 @@
 #!/bin/sh
-CURRENT_CATEGORY='[GraphQL-Client]'
+CURRENT_CATEGORY='[NodeJs Http]'
 
 # If a command fails then the deploy stops
 set -e
