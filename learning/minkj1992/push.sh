@@ -1,5 +1,5 @@
 #!/bin/sh
-CURRENT_CATEGORY='[NodeJs Http]'
+CURRENT_CATEGORY='[Express]'
 
 # If a command fails then the deploy stops
 set -e

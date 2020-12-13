@@ -1,0 +1,22 @@
+{
+  "name": "my-express",
+  "version": "1.0.0",
+  "description": "tutorial for express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/minkj1992/winner-winter"
+  },
+  "keywords": [
+    "express",
+    "nodejs"
+  ],
+  "author": "minkj1992",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

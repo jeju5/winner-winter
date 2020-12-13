@@ -143,7 +143,7 @@ yarn start
 ![homm](./assets/home.png)
 
 - deatil with suggestion
-![Detail](./assets/detail.png)
+  ![Detail](./assets/detail.png)
 
 ## nodejs
 
@@ -161,6 +161,17 @@ node <fileName>
 
 ```json
 {
-  type: "module"
+  "type": "module"
 }
+```
+
+## express
+
+```bash
+# for update npm
+sudo npm install -g npm
+
+npm init
+npm install express --save
+npm install express-generator -g
 ```
