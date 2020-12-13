@@ -2,6 +2,12 @@ import http from 'http';
 import fs from 'fs';
 
 const baseDir = './home.html';
+
+const parseCookies = (cookie = '') => 
+cookie
+.split(';')
+.map(v = > v.split('=')).reduce()
+
 const server = http
   .createServer((req, res) => {
     console.log('Hello visitor');
