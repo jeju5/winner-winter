@@ -167,11 +167,23 @@ node <fileName>
 
 ## express
 
+- express
+
 ```bash
 # for update npm
 sudo npm install -g npm
 
 npm init
 npm install express --save
+
+```
+
+- express-generator
+
+```bash
 npm install express-generator -g
+express --view=pug <앱이름>
+cd <앱이름>
+npm install
+DEBUG=<앱이름>:* npm start
 ```
