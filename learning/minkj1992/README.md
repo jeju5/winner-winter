@@ -196,3 +196,7 @@ yarn global add typescript
 yarn add typescript # https://github.com/TypeStrong/ts-node/issues/707#issuecomment-457448149
 yarn add tsc-watch --dev # refresh
 ```
+
+- constructor 귀찮으니, TypeScript constructor generator extension 사용
+  - lombok같은 기능이 있으면 좋겠다는 취지로 찾아봄
+  - cmd + shift + p -> `typescript:Generate constructor`
