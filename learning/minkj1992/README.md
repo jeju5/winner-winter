@@ -198,5 +198,12 @@ yarn add tsc-watch --dev # refresh
 ```
 
 - constructor 귀찮으니, TypeScript constructor generator extension 사용
+
   - lombok같은 기능이 있으면 좋겠다는 취지로 찾아봄
   - cmd + shift + p -> `typescript:Generate constructor`
+
+- hash 값
+
+```bash
+yarn add crypto-js
+```
