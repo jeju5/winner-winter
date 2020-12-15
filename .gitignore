@@ -115,3 +115,5 @@ fabric.properties
 **/*.lock
 **/package-lock.json
 .vscode
+
+**/dist

@@ -193,4 +193,6 @@ DEBUG=<앱이름>:* npm start
 ```bash
 yarn init
 yarn global add typescript
+yarn add typescript # https://github.com/TypeStrong/ts-node/issues/707#issuecomment-457448149
+yarn add tsc-watch --dev # refresh
 ```

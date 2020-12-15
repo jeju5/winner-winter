@@ -7,7 +7,12 @@
   "author": "minkj1992",
   "license": "MIT",
   "scripts": {
-    "start": "node index",
-    "prestart": "tsc"
+    "start": "tsc-watch --onSuccess \" node dist/index.js\" "
+  },
+  "devDependencies": {
+    "tsc-watch": "^4.2.9"
+  },
+  "dependencies": {
+    "typescript": "^4.1.3"
   }
 }
