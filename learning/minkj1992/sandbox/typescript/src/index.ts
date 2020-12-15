@@ -57,8 +57,16 @@ const createNewBlock = (data: string): Block => {
     nxtTimestamp,
     data
   );
+  const newBlock = new Block(
+    newIdx,
+    nxtHash,
+    prevBlock.hash,
+    data,
+    nxtTimestamp
+  );
 
-  return new Block(newIdx, nxtHash, prevBlock.hash, data, nxtTimestamp);
+  addBlock(newBlock);
+  return newBlock;
 };
 const getHashForBLock = (aBlock: Block): string =>
   Block.genBlockHash(
@@ -76,8 +84,17 @@ const isBlockValid = (candidateBlock: Block, prevBlock: Block): boolean =>
 
 const addBlock = (candidateBlock: Block): void => {
   if (isBlockValid(candidateBlock, getLatestBlock())) {
-    blockchain.push(candidateBlock);
+    getBlockchain().push(candidateBlock);
   }
 };
+
+for (let i = 0; i < 10; i++) {
+  const data: string = 'data' + i;
+  createNewBlock(data);
+}
+
+getBlockchain().forEach((v) => {
+  console.log(v);
+});
 
 export {};
