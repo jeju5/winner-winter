@@ -1,5 +1,5 @@
 #!/bin/sh
-CURRENT_CATEGORY='[Express]'
+CURRENT_CATEGORY='[Typescript]'
 
 # If a command fails then the deploy stops
 set -e

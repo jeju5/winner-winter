@@ -184,6 +184,13 @@ npm install express --save
 npm install express-generator -g
 express --view=pug <앱이름>
 cd <앱이름>
-npm install
+npm i
 DEBUG=<앱이름>:* npm start
+```
+
+## Typescript
+
+```bash
+yarn init
+yarn global add typescript
 ```

@@ -1,0 +1,13 @@
+{
+  "name": "typechain",
+  "version": "1.0.0",
+  "description": "Typescript by making a Blockchain with it",
+  "main": "index.js",
+  "repository": "https://github.com/minkj1992/winner-winter",
+  "author": "minkj1992",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index",
+    "prestart": "tsc"
+  }
+}
