@@ -212,8 +212,10 @@ yarn add crypto-js
 
 ```bash
 npm i -g @nestjs/cli
+
 nest new <projectName>
 # select yarn
 $ cd toy-nestjs
-$ yarn run start
+$ yarn start:dev
+$ nest g co
 ```
