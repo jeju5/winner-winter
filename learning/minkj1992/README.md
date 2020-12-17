@@ -207,3 +207,13 @@ yarn add tsc-watch --dev # refresh
 ```bash
 yarn add crypto-js
 ```
+
+## NestJs
+
+```bash
+npm i -g @nestjs/cli
+nest new <projectName>
+# select yarn
+$ cd toy-nestjs
+$ yarn run start
+```

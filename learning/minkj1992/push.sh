@@ -1,5 +1,5 @@
 #!/bin/sh
-CURRENT_CATEGORY='[Typescript]'
+CURRENT_CATEGORY='[NestJs]'
 
 # If a command fails then the deploy stops
 set -e
