@@ -10,25 +10,31 @@ import {
   Query,
 } from '@nestjs/common';
 import { nextTick } from 'process';
+import { MoviesService } from './movies.service';
+import { Movie } from './entity/movie.entity';
 
 @Controller('movies')
 export class MoviesController {
+  constructor(private readonly moviesService: MoviesService) {}
+
   @Get()
-  getMovies(): string {
-    return 'all movies';
+  getAll(): Movie[] {
+    return this.moviesService.getAll();
   }
 
   @Get('/:id')
-  getMovie(@Param('id') movieId: string) {
-    // router regex 문제가 좀 있네 .. django 만세
-    // next() 쓰기 위해서는 helmet middleware 세팅 필요
-    // if (!Number.isInteger(movieId)) next();
-    return `a movie ${movieId}`;
+  getOne(@Param('id') movieId: string): Movie {
+    return this.moviesService.getOne(movieId);
   }
 
   @Post()
   create(@Body() movieData) {
-    return movieData;
+    return this.moviesService.create(movieData);
+  }
+
+  @Delete(':/id')
+  remove(@Param('id') movieId: string) {
+    return this.moviesService.deleteOne(movieId);
   }
 
   @Patch(':/id')
@@ -37,13 +43,5 @@ export class MoviesController {
       updateMovie: movieId,
       ...updateData,
     };
-  }
-
-  @Delete(':/id')
-  remove(@Param('id') movieId: string) {}
-
-  @Get('search')
-  searchMovie(@Query('year') movieYear: string): string {
-    return `search movie with a movie title ${movieYear}`;
   }
 }

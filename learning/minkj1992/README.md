@@ -218,6 +218,7 @@ nest new <projectName>
 $ cd toy-nestjs
 $ yarn start:dev
 $ nest g co
+$ nest g s
 ```
 
 - `$ yarn add helm`
