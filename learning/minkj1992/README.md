@@ -219,6 +219,7 @@ $ cd toy-nestjs
 $ yarn start:dev
 $ nest g co
 $ nest g s
+$ yarn add class-validator class-transformer
 ```
 
 - `$ yarn add helm`
