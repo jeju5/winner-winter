@@ -217,8 +217,10 @@ nest new <projectName>
 # select yarn
 $ cd toy-nestjs
 $ yarn start:dev
-$ nest g co
-$ nest g s
+$ nest g co # movies
+$ nest g s # movies
 $ yarn add class-validator class-transformer
 $ yarn add @nestjs/mapped-types
+$ nest g mo # movies
+$ nest g co # app
 ```
