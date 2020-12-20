@@ -220,6 +220,5 @@ $ yarn start:dev
 $ nest g co
 $ nest g s
 $ yarn add class-validator class-transformer
+$ yarn add @nestjs/mapped-types
 ```
-
-- `$ yarn add helm`
